@@ -46,7 +46,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="footer">Power by <a href="http://www.aircheng.com" target="_blank" style="color:#fff">www.aircheng.com</a> Copyright &copy; 2005-2014</div>
+		<div id="footer">Power by <a href="http://www.baidu.com" target="_blank" style="color:#fff">www.baidu.com</a> Copyright &copy; 2005-2014</div>
 	</div>
 </body>
 </html>
