@@ -1,0 +1,18 @@
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected '}', expecting end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\products.php
+excepLine: 157
+excepCode: 0
+excepTime: 2016-09-06 19:36:09
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/products.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/products)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/products)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(367): IViewAction->run()
+#4 IWEB_PATH/controllers/site.php(444): IController->redirect(products)
+#5 IWEB_PATH/lib/web/action/inline_action.php(24): Site->products()
+#6 IWEB_PATH/lib/web/controller/controller_class.php(115): IInlineAction->run()
+#7 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(products)
+#8 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#9 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+

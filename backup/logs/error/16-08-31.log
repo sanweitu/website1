@@ -1,0 +1,36 @@
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected '<'
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\index.php
+excepLine: 749
+excepCode: 0
+excepTime: 2016-08-31 20:27:03
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/index.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/index)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/index)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(367): IViewAction->run()
+#4 IWEB_PATH/controllers/site.php(28): IController->redirect(index)
+#5 IWEB_PATH/lib/web/action/inline_action.php(24): Site->index()
+#6 IWEB_PATH/lib/web/controller/controller_class.php(115): IInlineAction->run()
+#7 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run()
+#8 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#9 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected '<'
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\simple\login.php
+excepLine: 749
+excepCode: 0
+excepTime: 2016-08-31 23:13:27
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/simple/login.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/simple/login)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/simple/login)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(367): IViewAction->run()
+#4 IWEB_PATH/controllers/simple.php(34): IController->redirect(login)
+#5 IWEB_PATH/lib/web/action/inline_action.php(24): Simple->login()
+#6 IWEB_PATH/lib/web/controller/controller_class.php(115): IInlineAction->run()
+#7 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(login)
+#8 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#9 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+

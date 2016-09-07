@@ -1,0 +1,103 @@
+{js:bxSlider}
+
+<div class="wrapper clearfix">
+
+	<div class="main f_l">
+		{if:$this->index_slide}
+		<ul class="bxslider">
+			{foreach:items=$this->index_slide}
+			<li title="{$item['name']}"><a href="http://www.baidu.com" target="_blank"><img src="{url:/pic/thumb/img/$item['img']}"  title="{$item['name']}" /></a></li>
+			{/foreach}
+		</ul>
+		{/if}
+	</div>
+	
+	<!--幻灯片 结束-->
+</div>
+
+<div class="wrapper clearfix">
+	
+
+	<div class="main f_l">
+
+		<!--最新商品-->
+		<div class="box yellow m_10">
+			<div class="title2">
+				<h2><img src="{skin:images/front/new_product.gif}" alt="最新商品" width="160" height="36" /></h2>
+			</div>
+			<div class="cont clearfix">
+				<ul class="prolist">
+					{foreach:items=Api::run('getCommendNew',8)}
+					{set:$tmpId=$item['id'];}
+					<li style="overflow:hidden">
+						<a href="{url:/site/products/id/$tmpId}"><img src="{url:/pic/thumb/img/$item[img]/w/175/h/175}" width="175" height="175" alt="{$item['name']}" /></a>
+						<p class="pro_title"><a title="{$item['name']}" href="{url:/site/products/id/$tmpId}">{$item['name']}</a></p>
+						<p class="brown"><b>￥{$item['sell_price']}</b></p>
+						<p class="light_gray"><s>￥{$item['market_price']}</s></p>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</div>
+		<!--最新商品-->
+
+		<!--首页推荐商品-->
+		{foreach:items=Api::run('getCategoryListTop')  item=$first }
+		<div class="product-model" name="showGoods">
+			<div class="title title3">
+				<h2><a href="{url:/site/pro_list/cat/$first[id]}"><strong>{$first['name']}</strong></a></h2>
+				<a class="more" href="{url:/site/pro_list/cat/$first[id]}">更多商品...</a>
+				<ul class="category">
+					{foreach:items=Api::run('getCategoryByParentid',array('#parent_id#',$first['id']))  item=$second}
+					<li><a href="{url:/site/pro_list/cat/$second[id]}">{$second['name']}</a><span></span></li>
+					{/foreach}
+				</ul>
+			</div>
+
+			<div class="cont clearfix">
+				<ul class="prolist">
+					{foreach:items=Api::run('getCategoryExtendList',array('#categroy_id#',$first['id']),8)}
+					<li style="overflow:hidden">
+						<a href="{url:/site/products/id/$item[id]}"><img src="{url:/pic/thumb/img/$item[img]/w/175/h/175}" width="175" height="175" alt="{$item['name']}" title="{$item['name']}" /></a>
+						<p class="pro_title"><a title="{$item['name']}" href="{url:/site/products/id/$item[id]}">{$item['name']}</a></p>
+						<p class="brown"><b>￥{$item['sell_price']}</b></p>
+						<p class="light_gray"><s>￥{$item['market_price']}</s></p>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</div>
+		{/foreach}
+
+		
+	</div>
+</div>
+
+<script type='text/javascript'>
+//dom载入完毕执行
+jQuery(function()
+{
+	//幻灯片开启
+	$('.bxslider').bxSlider({'mode':'fade','captions':true,'pager':false,'auto':true});
+
+	//index 分类展示
+	$('#index_category tr').hover(
+		function(){
+			$(this).addClass('current');
+		},
+		function(){
+			$(this).removeClass('current');
+		}
+	);
+
+	
+
+	//首页商品变色
+	var colorArray = ['green','yellow','purple','black'];
+	$('div[name="showGoods"]').each(function(i)
+	{
+		$(this).addClass(colorArray[i%colorArray.length]);
+	});
+});
+
+</script>
