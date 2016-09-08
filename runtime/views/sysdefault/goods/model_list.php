@@ -25,9 +25,11 @@
 			<div id="menu">
 				<ul name="topMenu">
 					<?php foreach(menu::getTopMenu($menuData) as $key => $item){?>
+					<?php if($key="商品"){?>
 					<li>
 						<a hidefocus="true" href="<?php echo IUrl::creatUrl("".$item."");?>"><?php echo isset($key)?$key:"";?></a>
 					</li>
+					<?php }?>
 					<?php }?>
 				</ul>
 			</div>

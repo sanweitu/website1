@@ -34,6 +34,7 @@
 			<p><a href="<?php echo IUrl::creatUrl("/systemadmin/logout");?>">退出管理</a> <a href="<?php echo IUrl::creatUrl("/system/admin_repwd");?>">修改密码</a> <a href="<?php echo IUrl::creatUrl("/system/default");?>">后台首页</a> <a href="<?php echo IUrl::creatUrl("");?>" target='_blank'>商城首页</a> <span>您好 <label class='bold'><?php echo isset($this->admin['admin_name'])?$this->admin['admin_name']:"";?></label>，当前身份 <label class='bold'><?php echo isset($this->admin['admin_role_name'])?$this->admin['admin_role_name']:"";?></label></span></p>
 		</div>
 		<div id="info_bar">
+			<label class="navindex"><a href="<?php echo IUrl::creatUrl("/system/navigation");?>">快速导航管理</a></label>
 			<span class="nav_sec">
 			<?php $adminId = $this->admin['admin_id']?>
 			<?php $query = new IQuery("quick_naviga");$query->where = "admin_id = $adminId and is_del = 0";$items = $query->find(); foreach($items as $key => $item){?>
@@ -60,94 +61,65 @@
 		</div>
 
 		<div id="admin_right">
-			<?php 
-	$start = IFilter::act(IReq::get('start'));
-	$end   = IFilter::act(IReq::get('end'));
-	$countData = statistics::userReg($start,$end);
-?>
-
-<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/my97date/wdatepicker.js"></script>
-<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/highcharts/highcharts.js"></script>
-
-<div class="headbar">
-	<div class="position"><span>统计</span><span>></span><span>基础数据统计</span><span>></span><span>注册用户统计</span></div>
-	<form action='<?php echo IUrl::creatUrl("/market/user_reg");?>' method='get'>
-		<input type='hidden' name='controller' value='market' />
-		<input type='hidden' name='action' value='user_reg' />
-		<div class="operating">
-			<div class="search f_l">
-				<input type="text" name='start' class="Wdate" id="date_start" pattern='date' value='<?php echo isset($start)?$start:"";?>' alt='' onFocus="WdatePicker()" empty /> —— <input type="text" value="<?php echo isset($end)?$end:"";?>" name='end' pattern='date' class="Wdate" id="date_end" onFocus="WdatePicker()" empty />
-				<button class="btn"><span>查 询</span></button>
-				<button class="btn" onclick="userReport()"><span>导出报表</span></button>
-			</div>
-		</div>
-    </form>
-</div>
-
-<div class="content_box">
-	<h3>用户注册统计：</h3>
-	<div class='cont'>
-		<ul>
-			<li>用户注册统计，可以帮助更好的了解你的shop用户的注册情况，为你下一步的营销计划做出更好的判定！</li>
-		</ul>
+			<div class="headbar">
+	<div class="position"><span>工具</span><span>></span><span>文章管理</span><span>></span><span>文章列表</span></div>
+	<div class="operating">
+		<a href="javascript:void(0)" onclick="event_link('<?php echo IUrl::creatUrl("/tools/article_edit");?>')"><button class="operating_btn" type="button"><span class="addition">添加文章</span></button></a>
+		<a href="javascript:void(0)" onclick="selectAll('id[]');"><button class="operating_btn" type="button"><span class="sel_all">全选</span></button></a>
+		<a href="javascript:void(0)" onclick="delModel();"><button class="operating_btn" type="button"><span class="delete">批量删除</span></button></a>
 	</div>
 </div>
+<div class="content">
+	<form action="<?php echo IUrl::creatUrl("/tools/article_del");?>" method="post" name="article">
+		<table class="list_table">
+			<colgroup>
+				<col width="40px" />
+				<col width="250px" />
+				<col width="100px" />
+				<col width="150px" />
+				<col width="60px" />
+				<col width="60px" />
+				<col width="60px" />
+				<col width="110px" />
+			</colgroup>
 
-<div class='content_box'>
-	<div id="myChart" style="min-height:350px;"></div>
+			<thead>
+				<tr>
+					<th>选择</th>
+					<th>标题</th>
+					<th>文章分类</th>
+					<th>发布时间</th>
+					<th>展示</th>
+					<th>首页推荐</th>
+					<th>排序</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<?php $page= (isset($_GET['page'])&&(intval($_GET['page'])>0))?intval($_GET['page']):1;?>
+				<?php $query = new IQuery("article as ar");$query->join = "left join article_category as ac on ac.id = ar.category_id";$query->order = "ar.sort asc,ar.id desc";$query->page = "$page";$query->fields = "ar.id,ar.title,ar.create_time,ar.top,ar.style,ar.color,ar.sort,ar.visibility,ac.name";$items = $query->find(); foreach($items as $key => $item){?>
+				<tr>
+					<td><input type="checkbox" name="id[]" value="<?php echo isset($item['id'])?$item['id']:"";?>" /></td>
+					<td><a target="_blank" href='<?php echo IUrl::creatUrl("/site/article_detail/id/".$item['id']."");?>' title='查看'><?php echo Article::showTitle($item['title'],$item['color'],$item['style']);?></a></td>
+					<td><?php echo isset($item['name'])?$item['name']:"";?></td>
+					<td><?php echo isset($item['create_time'])?$item['create_time']:"";?></td>
+					<td><?php echo ($item['visibility']==1) ? '是':'否';?></td>
+					<td><?php echo ($item['top']==1) ? '是':'否';?></td>
+					<td><?php echo isset($item['sort'])?$item['sort']:"";?></td>
+					<td>
+						<a href='<?php echo IUrl::creatUrl("/tools/article_edit/id/".$item['id']."");?>'><img class="operator" src="<?php echo $this->getWebSkinPath()."images/admin/icon_edit.gif";?>" alt="编辑" title="编辑" /></a>
+						<a target="_blank" href='<?php echo IUrl::creatUrl("/site/article_detail/id/".$item['id']."");?>'><img class="operator" src="<?php echo $this->getWebSkinPath()."images/admin/icon_check.gif";?>" alt="查看" title="查看" /></a>
+						<a href='javascript:void(0)' onclick="delModel({link:'<?php echo IUrl::creatUrl("/tools/article_del/id/".$item['id']."");?>'});"><img class="operator" src="<?php echo $this->getWebSkinPath()."images/admin/icon_del.gif";?>" alt="删除" title="删除" /></a>
+					</td>
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+	</form>
 </div>
+<?php echo $query->getPageBar();?>
 
-<script type='text/javascript'>
-//图表生成
-$(function()
-{
-	//图标模板
-	userHighChart = $('#myChart').highcharts(
-	{
-		title:
-		{
-			text:'注册用户'
-		},
-		xAxis:
-		{
-			title:
-			{
-				text:'时间'
-			},
-			categories:<?php echo JSON::encode(array_keys($countData));?>,
-		},
-		yAxis:
-		{
-			title:
-			{
-				text:'人数(人)'
-			},
-		},
-		series:
-		[
-			{
-				name:'注册人数',
-				data:<?php echo JSON::encode(array_values($countData));?>
-			}
-		],
-		tooltip:
-		{
-			valueSuffix:'人'
-		}
-	});
-});
-
-//生成 Excel并下载
-function userReport()
-{
-	var url   = '<?php echo IUrl::creatUrl("/market/user_report/start/@start@/end/@end@");?>';
-	var start = $('#date_start').val();
-	var end   = $('#date_end').val();
-	url = url.replace("@start@",start).replace("@end@",end);
-	window.open(url);
-	return false;
-}
-</script>
 		</div>
 	</div>
 

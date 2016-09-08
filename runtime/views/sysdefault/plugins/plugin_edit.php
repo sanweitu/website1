@@ -34,6 +34,7 @@
 			<p><a href="<?php echo IUrl::creatUrl("/systemadmin/logout");?>">退出管理</a> <a href="<?php echo IUrl::creatUrl("/system/admin_repwd");?>">修改密码</a> <a href="<?php echo IUrl::creatUrl("/system/default");?>">后台首页</a> <a href="<?php echo IUrl::creatUrl("");?>" target='_blank'>商城首页</a> <span>您好 <label class='bold'><?php echo isset($this->admin['admin_name'])?$this->admin['admin_name']:"";?></label>，当前身份 <label class='bold'><?php echo isset($this->admin['admin_role_name'])?$this->admin['admin_role_name']:"";?></label></span></p>
 		</div>
 		<div id="info_bar">
+			<label class="navindex"><a href="<?php echo IUrl::creatUrl("/system/navigation");?>">快速导航管理</a></label>
 			<span class="nav_sec">
 			<?php $adminId = $this->admin['admin_id']?>
 			<?php $query = new IQuery("quick_naviga");$query->where = "admin_id = $adminId and is_del = 0";$items = $query->find(); foreach($items as $key => $item){?>
@@ -60,94 +61,108 @@
 		</div>
 
 		<div id="admin_right">
-			<?php 
-	$start = IFilter::act(IReq::get('start'));
-	$end   = IFilter::act(IReq::get('end'));
-	$countData = statistics::userReg($start,$end);
-?>
-
-<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/my97date/wdatepicker.js"></script>
-<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/highcharts/highcharts.js"></script>
-
-<div class="headbar">
-	<div class="position"><span>统计</span><span>></span><span>基础数据统计</span><span>></span><span>注册用户统计</span></div>
-	<form action='<?php echo IUrl::creatUrl("/market/user_reg");?>' method='get'>
-		<input type='hidden' name='controller' value='market' />
-		<input type='hidden' name='action' value='user_reg' />
-		<div class="operating">
-			<div class="search f_l">
-				<input type="text" name='start' class="Wdate" id="date_start" pattern='date' value='<?php echo isset($start)?$start:"";?>' alt='' onFocus="WdatePicker()" empty /> —— <input type="text" value="<?php echo isset($end)?$end:"";?>" name='end' pattern='date' class="Wdate" id="date_end" onFocus="WdatePicker()" empty />
-				<button class="btn"><span>查 询</span></button>
-				<button class="btn" onclick="userReport()"><span>导出报表</span></button>
-			</div>
-		</div>
-    </form>
+			<div class="headbar">
+	<div class="position"><span>工具</span><span>></span><span>插件管理</span><span>></span><span>配置插件</span></div>
 </div>
 
 <div class="content_box">
-	<h3>用户注册统计：</h3>
-	<div class='cont'>
-		<ul>
-			<li>用户注册统计，可以帮助更好的了解你的shop用户的注册情况，为你下一步的营销计划做出更好的判定！</li>
-		</ul>
+	<div class="content">
+		<form action="<?php echo IUrl::creatUrl("/plugins/plugin_update");?>" method="post">
+			<input type='hidden' name='class_name' value='' />
+			<table class="form_table" cellpadding="0" cellspacing="0">
+				<colgroup>
+					<col width="200px" />
+					<col />
+				</colgroup>
+
+				<tr>
+					<th>插件名称：</th>
+					<td><?php echo isset($this->pluginRow['name'])?$this->pluginRow['name']:"";?></td>
+				</tr>
+
+				<tr>
+					<th>插件简述：</th>
+					<td><?php echo isset($this->pluginRow['description'])?$this->pluginRow['description']:"";?></td>
+				</tr>
+
+				<?php if($this->pluginRow['explain']){?>
+				<tr>
+					<th>使用说明：</th>
+					<td><?php echo isset($this->pluginRow['explain'])?$this->pluginRow['explain']:"";?></td>
+				</tr>
+				<?php }?>
+
+				<tr>
+					<th>插件排序：</th><td><input class="small" name="sort" type="text" value="" pattern="required" alt="排序不能为空！" /></td>
+				</tr>
+
+				<tr>
+					<th>插件状态：</th>
+					<td>
+						<label class='attr'><input name="is_open" type="radio" value="1" checked="checked" />开启</label>
+						<label class='attr'><input name="is_open" type="radio" value="0" />关闭</label>
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<button class="submit" type='submit'><span>确 定</span></button>
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </div>
 
-<div class='content_box'>
-	<div id="myChart" style="min-height:350px;"></div>
-</div>
+<!--数据录入模板-->
+<script type='text/html' id='paramTemplate'>
+<%for(var item in templateData){%>
+<%var key = item;%>
+<%var item = templateData[item];%>
+<%var valueItems = item['value'];%>
+<tr>
+	<th><%=item["name"]%>：</th>
+	<td>
+		<%if(item['type'] == "radio"){%>
+			<%for(var tempKey in valueItems){%>
+			<%tempVal = valueItems[tempKey]%>
+				<label class="attr"><input type="radio" name="<%=key%>" value="<%=tempVal%>" /><%=tempKey%></label>
+			<%}%>
+		<%}else if(item['type'] == "checkbox"){%>
+			<%for(var tempKey in valueItems){%>
+			<%tempVal = valueItems[tempKey]%>
+				<label class="attr"><input type="checkbox" name="<%=key%>[]" value="<%=tempVal%>" /><%=tempKey%></label>
+			<%}%>
+		<%}else if(item['type'] == "select"){%>
+			<select class="auto" name="<%=key%>" pattern="<%=item['pattern']%>">
+			<%for(var tempKey in valueItems){%>
+			<%tempVal = valueItems[tempKey]%>
+			<option value="<%=tempVal%>"><%=tempKey%></option>
+			<%}%>
+			</select>
+		<%}else if(item['type'] == "text"){%>
+			<input type="text" name="<%=key%>" value="<%=item['value']%>" class="normal" pattern="<%=item['pattern']%>" />
+		<%}%>
+	</td>
+</tr>
+<%}%>
+</script>
 
-<script type='text/javascript'>
-//图表生成
+<script language="javascript">
+//DOM加载完毕
 $(function()
 {
-	//图标模板
-	userHighChart = $('#myChart').highcharts(
-	{
-		title:
-		{
-			text:'注册用户'
-		},
-		xAxis:
-		{
-			title:
-			{
-				text:'时间'
-			},
-			categories:<?php echo JSON::encode(array_keys($countData));?>,
-		},
-		yAxis:
-		{
-			title:
-			{
-				text:'人数(人)'
-			},
-		},
-		series:
-		[
-			{
-				name:'注册人数',
-				data:<?php echo JSON::encode(array_values($countData));?>
-			}
-		],
-		tooltip:
-		{
-			valueSuffix:'人'
-		}
-	});
-});
+	//加载插件配置
+	var paramHtml = template.render('paramTemplate',{'templateData':<?php echo JSON::encode($this->pluginRow['config_name']);?>});
+	$('.form_table tr:eq(1)').after(paramHtml);
 
-//生成 Excel并下载
-function userReport()
-{
-	var url   = '<?php echo IUrl::creatUrl("/market/user_report/start/@start@/end/@end@");?>';
-	var start = $('#date_start').val();
-	var end   = $('#date_end').val();
-	url = url.replace("@start@",start).replace("@end@",end);
-	window.open(url);
-	return false;
-}
+	//数据加载
+	var formInstance = new Form();
+	formInstance.init(<?php echo JSON::encode($this->pluginRow['config_param']);?>);
+	formInstance.init(<?php echo JSON::encode($this->pluginRow);?>);
+});
 </script>
+
 		</div>
 	</div>
 

@@ -35,7 +35,7 @@ class Menu
 			)
 		),
 
-		'会员'=>array(
+		/*'会员'=>array(
 			'会员管理'=>array(
 	    		'/member/member_list' 	=> '会员列表',
 	     		'/member/group_list' 	=> '会员组列表',
@@ -56,9 +56,9 @@ class Menu
 				'/message/registry_list'    => '邮件订阅',
 				'/message/marketing_sms_list'=> '营销短信',
 			),
-		),
+		),*/
 
-	   '订单'=>array(
+	   /*'订单'=>array(
         	'订单管理'=>array(
                 '/order/order_list' => '订单列表',
                 '/order/order_edit' => '添加订单'
@@ -72,9 +72,9 @@ class Menu
         	'发货地址'=>array(
         		'/order/ship_info_list'         => '发货地址管理',
         	),
-		),
+		),*/
 
-		'营销'=>array(
+		/*'营销'=>array(
         	'促销活动' => array(
         		'/market/pro_rule_list' => '促销活动列表'
         	),
@@ -86,7 +86,7 @@ class Menu
         	'代金券管理'=>array(
         		'/market/ticket_list'       => '代金券列表',
         	)
-		),
+		),*/
 
 		'统计'=>array(
 			'基础数据统计'=>array(
@@ -98,14 +98,14 @@ class Menu
 				'/market/account_list'   => '充值操作记录',
 				'/market/operation_list' => '后台操作记录',
 			),
-			'商户数据统计'=>array(
+			/*'商户数据统计'=>array(
 				'/market/order_goods_list' => '货款明细列表',
 				'/market/bill_list' => '货款结算申请',
-			)
+			)*/
 		),
 
 
-        '系统'=>array(
+        /*'系统'=>array(
     		'后台首页'=>array(
     			'/system/default' => '后台首页',
     		),
@@ -136,7 +136,7 @@ class Menu
         		'/system/role_list'  => '角色',
         		'/system/right_list' => '权限资源'
         	),
-		),
+		),*/
 
        '工具'=>array(
 			'数据库管理'=>array(
@@ -148,7 +148,7 @@ class Menu
 				'/tools/article_list'=> '文章列表'
 			),
 
-			'帮助管理'=>array(
+			/*'帮助管理'=>array(
    				'/tools/help_cat_list'=> '帮助分类',
    				'/tools/help_list'=> '帮助列表'
    			),
@@ -164,13 +164,13 @@ class Menu
    			),
      		'网站地图'=>array(
             	'/tools/seo_sitemaps' => '网站搜索地图',
-			)
+			)*/
 		),
-		'插件' => array(
+		/*'插件' => array(
        		'插件管理' => array(
        			'/plugins/plugin_list' => '插件列表',
        		),
-		),
+		),*/
 	);
 
 	//非菜单连接映射关系,array(视图名称 => menu数组中已存在的菜单连接)

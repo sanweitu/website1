@@ -34,6 +34,7 @@
 			<p><a href="<?php echo IUrl::creatUrl("/systemadmin/logout");?>">退出管理</a> <a href="<?php echo IUrl::creatUrl("/system/admin_repwd");?>">修改密码</a> <a href="<?php echo IUrl::creatUrl("/system/default");?>">后台首页</a> <a href="<?php echo IUrl::creatUrl("");?>" target='_blank'>商城首页</a> <span>您好 <label class='bold'><?php echo isset($this->admin['admin_name'])?$this->admin['admin_name']:"";?></label>，当前身份 <label class='bold'><?php echo isset($this->admin['admin_role_name'])?$this->admin['admin_role_name']:"";?></label></span></p>
 		</div>
 		<div id="info_bar">
+			<label class="navindex"><a href="<?php echo IUrl::creatUrl("/system/navigation");?>">快速导航管理</a></label>
 			<span class="nav_sec">
 			<?php $adminId = $this->admin['admin_id']?>
 			<?php $query = new IQuery("quick_naviga");$query->where = "admin_id = $adminId and is_del = 0";$items = $query->find(); foreach($items as $key => $item){?>
@@ -60,93 +61,43 @@
 		</div>
 
 		<div id="admin_right">
-			<?php 
-	$start = IFilter::act(IReq::get('start'));
-	$end   = IFilter::act(IReq::get('end'));
-	$countData = statistics::userReg($start,$end);
-?>
-
-<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/my97date/wdatepicker.js"></script>
-<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/highcharts/highcharts.js"></script>
-
+			<script type="text/javascript" charset="UTF-8" src="/iwebshop/runtime/_systemjs/editor/kindeditor-min.js"></script><script type="text/javascript">window.KindEditor.options.uploadJson = "/iwebshop/index.php?controller=pic&action=upload_json";window.KindEditor.options.fileManagerJson = "/iwebshop/index.php?controller=pic&action=file_manager_json";</script>
 <div class="headbar">
-	<div class="position"><span>统计</span><span>></span><span>基础数据统计</span><span>></span><span>注册用户统计</span></div>
-	<form action='<?php echo IUrl::creatUrl("/market/user_reg");?>' method='get'>
-		<input type='hidden' name='controller' value='market' />
-		<input type='hidden' name='action' value='user_reg' />
-		<div class="operating">
-			<div class="search f_l">
-				<input type="text" name='start' class="Wdate" id="date_start" pattern='date' value='<?php echo isset($start)?$start:"";?>' alt='' onFocus="WdatePicker()" empty /> —— <input type="text" value="<?php echo isset($end)?$end:"";?>" name='end' pattern='date' class="Wdate" id="date_end" onFocus="WdatePicker()" empty />
-				<button class="btn"><span>查 询</span></button>
-				<button class="btn" onclick="userReport()"><span>导出报表</span></button>
-			</div>
-		</div>
-    </form>
+	<div class="position"><span>商品</span><span>></span><span>品牌管理</span><span>></span><span><?php if(isset($category['id'])){?>编辑<?php }else{?>添加<?php }?>分类</span></div>
 </div>
-
 <div class="content_box">
-	<h3>用户注册统计：</h3>
-	<div class='cont'>
-		<ul>
-			<li>用户注册统计，可以帮助更好的了解你的shop用户的注册情况，为你下一步的营销计划做出更好的判定！</li>
-		</ul>
+	<div class="content form_content">
+		<form action="<?php echo IUrl::creatUrl("/brand/category_save");?>" method="post" name="brandForm">
+			<input name="id" value="" type="hidden" />
+			<table class="form_table">
+				<col width="150px" />
+				<col />
+				<tr>
+					<th>分类名称：</th>
+					<td>
+						<input class="normal" name="name" type="text" value="" pattern="required" alt="分类名称不能为空" /><label>*</label>
+					</td>
+				</tr>
+				<tr>
+					<th>所属商品分类：</th>
+					<td>
+						<span id="__categoryBox" style="margin-bottom:8px"></span>
+						<button class="btn" type="button" name="_goodsCategoryButton"><span class="add">设置分类</span></button>
+						<?php plugin::trigger('goodsCategoryWidget',array("name" => "goods_category_id","value" => isset($this->catRow['goods_category_id']) ? $this->catRow['goods_category_id'] : ""))?>
+					</td>
+				</tr>
+				<tr>
+					<td></td><td><button class="submit" type="submit"><span>确 定</span></button></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </div>
 
-<div class='content_box'>
-	<div id="myChart" style="min-height:350px;"></div>
-</div>
-
-<script type='text/javascript'>
-//图表生成
-$(function()
-{
-	//图标模板
-	userHighChart = $('#myChart').highcharts(
-	{
-		title:
-		{
-			text:'注册用户'
-		},
-		xAxis:
-		{
-			title:
-			{
-				text:'时间'
-			},
-			categories:<?php echo JSON::encode(array_keys($countData));?>,
-		},
-		yAxis:
-		{
-			title:
-			{
-				text:'人数(人)'
-			},
-		},
-		series:
-		[
-			{
-				name:'注册人数',
-				data:<?php echo JSON::encode(array_values($countData));?>
-			}
-		],
-		tooltip:
-		{
-			valueSuffix:'人'
-		}
-	});
-});
-
-//生成 Excel并下载
-function userReport()
-{
-	var url   = '<?php echo IUrl::creatUrl("/market/user_report/start/@start@/end/@end@");?>';
-	var start = $('#date_start').val();
-	var end   = $('#date_end').val();
-	url = url.replace("@start@",start).replace("@end@",end);
-	window.open(url);
-	return false;
-}
+<script type="text/javascript">
+//表单回填
+var formObj = new Form('brandForm');
+formObj.init(<?php echo JSON::encode($this->catRow);?>);
 </script>
 		</div>
 	</div>
