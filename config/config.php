@@ -41,8 +41,8 @@
   array (
     'pc' => 
     array (
-      'sysdefault' => 'green',
-      'sysseller' => 'green',
+      'sysdefault' => 'default',
+      'sysseller' => 'default',
       'anju' => 'default',
     ),
     'mobile' => 

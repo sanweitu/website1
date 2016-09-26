@@ -2,67 +2,186 @@
 {js:zoom}
 {js:bxSlider}
 <script type="text/javascript" src="{theme:javascript/products.js}"></script>
-<div class="wrapper clearfix">
-	<div class="summary">
+<!--etalage-->
+<link rel="stylesheet" href="{skin:css/etalage.css}">
+<script src="{theme:javascript/jquery.etalage.min.js}"></script>
 
-		<!--基本信息区域-->
+<script type="text/javascript" src="{theme:javascript/products.js}"></script>
 
-		<div class="single-para ">
-			 <h4>{$name} </h4>	
-				<li>
-					<span class="f_r light_gray">商品编号：<label id="data_goodsNo">{echo:$goods_no?$goods_no:$id}</label></span>
-				</li>						 
-				<h5 class="item_price">￥<span class="f30" id="data_sellPrice">{$sell_price}</span></h5>							
-				<p class="para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat </p>
-				<a href="#" class="add-cart item_add">马上拥有</a>							
-		</div>
-		
-	</div>
+<script>
+			jQuery(document).ready(function($){
 
-	<!--图片放大镜-->
-	<div class="preview">
-		<div class="pic_show" style="width:435px;height:435px;position:relative;z-index:5;padding-bottom:5px;">
-			<img id="picShow" rel="" src="" />
-		</div>
+				$('#etalage').etalage({
+					thumb_image_width: 300,
+					thumb_image_height: 400,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id){
+						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+					}
+				});
 
-		<ul id="goodsPhotoList" class="pic_thumb">
-			{foreach:items=$photo}
-			<li>
-				<a href="javascript:void(0);" thumbimg="{url:/pic/thumb/img/$item['img']/w/435/h/435}" sourceimg="{webroot:$item['img']}">
-					<img src='{url:/pic/thumb/img/$item['img']/w/60/h/60}' width="60px" height="60px" />
-				</a>
-				
-			</li>
-			{/foreach}
-		</ul>
-	</div>
-</div>
-
-
-<script type="text/javascript">
-//DOM加载结束后
-$(function(){
-	//初始化商品详情对象
-	var productInstance = new productClass("{$id}","{$this->user['user_id']}","{$promo}","{$active_id}");
-
-	//初始化商品轮换图
-	$('#goodsPhotoList').bxSlider({
-		infiniteLoop:false,
-		hideControlOnEnd:true,
-		controls:true,
-		pager:false,
-		minSlides: 5,
-		maxSlides: 5,
-		slideWidth: 72,
-		slideMargin: 15,
-		onSliderLoad:function(currentIndex){
-			//默认初始化显示第一张
-			$('[thumbimg]:eq('+currentIndex+')').trigger('click');
-
-			//放大镜
-			$("#picShow").imagezoom();
-		}
-	});
-
-});
+			});
 </script>
+
+
+<!-- //etalage-->
+  
+<div class="single-sec">
+	 <div class="container">
+		 {set:$breadGuide = goods_class::catRecursion($category);}
+		<ol class="breadcrumb">
+			<li><a href="{url:}">Home</a></li>
+			{foreach:items=$breadGuide}  <li class="active"><a href="{url:/site/pro_list/cat/$item[id]}">{$item['name']}</a></li>{/foreach}
+		</ol>
+		 <!-- start content -->	
+			<div class="col-md-9 det">
+				  <div class="single_left">
+					 <div class="grid images_3_of_2">
+						 <ul id="etalage">
+						 {foreach:items=$photo}
+							<li>
+								<a href="javascript:void(0);" thumbimg="{url:/pic/thumb/img/$item['img']}" sourceimg="{webroot:$item['img']}">
+								<img class="etalage_source_image" src="{url:/pic/thumb/img/$item['img']}"  />
+								<img class="etalage_source_image" src="{url:/pic/thumb/img/$item['img']}"   title="" />
+								</a>
+
+							</li>
+							{/foreach}
+						 </ul>
+						 <div class="clearfix"></div>		
+				      </div>
+				  </div>
+					
+				<div class="single-right">
+					
+						 <h3>{$name} </h3>
+						 <div class="id"><h4>ID: {echo:$goods_no?$goods_no:$id}</h4></div>
+						<div class="single-bottom1 content">
+							<h6>推荐理由：</h6>
+							{if:isset($reason) && $reason}
+							<p class="prod-desc">{$reason}</p>
+							{/if}
+						 </div>	
+					
+					
+				  <form action="" class="sky-form">
+						     <fieldset>					
+							   <section>
+							     <div class="rating">
+									<input type="radio" name="stars-rating" id="stars-rating-5">
+									<label for="stars-rating-5"><i class="icon-star"></i></label>
+									<input type="radio" name="stars-rating" id="stars-rating-4">
+									<label for="stars-rating-4"><i class="icon-star"></i></label>
+									<input type="radio" name="stars-rating" id="stars-rating-3">
+									<label for="stars-rating-3"><i class="icon-star"></i></label>
+									<input type="radio" name="stars-rating" id="stars-rating-2">
+									<label for="stars-rating-2"><i class="icon-star"></i></label>
+									<input type="radio" name="stars-rating" id="stars-rating-1">
+									<label for="stars-rating-1"><i class="icon-star"></i></label>
+									<div class="clearfix"></div>
+								 </div>
+							  </section>
+						    </fieldset>
+					  </form>
+					 {if:($attribute)}
+						{foreach:items=$attribute}
+						<li>{$item['name']}：{$item['attribute_value']}</li>
+						{/foreach}
+					{/if}
+					{if:isset($up_time) && $up_time}
+					<li>上架时间：{$up_time}</li>
+					{/if}
+					  <div class="cost">
+						 <div class="prdt-cost">
+							 <ul>
+								 <li>MRP: <del>￥ {$market_price}</del></li>								 
+								 <li>Sellling Price:</li>
+								 <li class="active">￥ {$sell_price}</li>
+								 <a href="{$link}">GET NOW</a>
+								
+							 </ul>
+							 
+						 </div>
+
+						 <div class="clearfix"></div>
+						 <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+					  </div>
+					  
+					  
+					<div class="hidden comment_list box">
+				<div class="title3">
+					<img src="{skin:images/front/comm.gif}" width="16px" height="16px" />
+					商品评论<span class="f12 normal">（已有<b class="red2">{$comments}</b>条）</span>
+				</div>
+
+				<div id='commentBox'></div>
+
+				<!--评论JS模板-->
+				<script type='text/html' id='commentRowTemplate'>
+				<div class="item">
+					<div class="user">
+						<div class="ico">
+							<a href="javascript:void(0)">
+								<img src="{webroot:<%=head_ico%>}" width="70px" height="70px" onerror="this.src='{skin:images/front/user_ico.gif}'" />
+							</a>
+						</div>
+						<span class="blue"><%=username%></span>
+					</div>
+					<dl class="desc">
+						<p class="clearfix">
+							<b>评分：</b>
+							<span class="grade-star g-star<%=point%>"></span>
+							<span class="light_gray"><%=comment_time%></span><label></label>
+						</p>
+						<hr />
+						<p><b>评价：</b><span class="gray"><%=contents%></span></p>
+						<%if(recontents){%>
+						<p><b>回复：</b><span class="red"><%=recontents%></span></p>
+						<%}%>
+					</dl>
+					<div class="corner b"></div>
+				</div>
+				<hr />
+				</script>
+			</div>
+			<!-- 顾客评论 end -->  				 
+		</div>
+				  <div class="clearfix"></div>
+				  <div class="sofaset-info">
+						 <h4>商品{$name}已有<b class="red2">{$comments}</b>条评论</h4>
+						 <!--<div class="user">
+						<div class="ico">
+							<a href="javascript:void(0)">
+								<img src="{webroot:<%=head_ico%>}" width="70px" height="70px" onerror="this.src='{skin:images/front/user_ico.gif}'" />
+							</a>
+						</div>
+						
+						<span class="blue"><%=username%></span>
+					</div>-->
+					<div class="desc">
+						<p class="clearfix">
+							<b>评分：</b>
+							<li><span ><%=point%>"></span></li>
+							<li><span ><%=comment_time%></span><label></label></li>
+						</p>
+						<hr />
+						<p><b>评价：</b><span class="gray"><%=contents%></span></p>
+						<%if(recontents){%>
+						<p><b>回复：</b><span class="red"><%=recontents%></span></p>
+						<%}%>
+					</div>
+				  </div>				  					
+		    </div>
+			     				
+		     <div class="clearfix"></div>
+	  </div>
+	{if:isset($content) && $content}
+		<div class="salebox">
+			<strong class="saletitle block">产品描述：</strong>
+			<p class="saledesc">{$content}</p>
+		</div>
+	{/if}	  
+</div>
+<!---->

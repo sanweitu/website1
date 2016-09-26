@@ -27,7 +27,19 @@
 					<tr>
 						<th>商品名称：</th>
 						<td>
-							<input class="normal" name="name" type="text" value="" pattern="required" alt="商品名称不能为空" /><label>*</label>
+							<input class="normal" name="name" type="text" value="" pattern="required" alt="商品名称不能为空" /><label class="red">*</label>
+						</td>
+					</tr>
+					<tr>
+						<th>商品链接：</th>
+						<td>
+							<input class="normal" name="link" type="text" value="" pattern="required" alt="无效的商品链接" /><label class="red">*</label>
+						</td>
+					</tr>
+					<tr>
+						<th>推荐理由：</th>
+						<td>
+							<input class="normal" name="reason" type="text" value="" pattern="required"  alt="不能为空" /><label class="red">*</label>
 						</td>
 					</tr>
 					<tr>
@@ -37,18 +49,7 @@
 							<label>每个关键词最长为15个字符，必须以","(逗号)分隔符</label>
 						</td>
 					</tr>
-					<tr>
-						<th>所属商户：</th>
-						<td>
-							<select class="auto" name="seller_id">
-								<option value="0">商城平台自营 </option>
-								{query:name=seller where=is_del eq 0}
-								<option value="{$item['id']}">{$item['true_name']}-{$item['seller_name']}</option>
-								{/query}
-							</select>
-							<a href='{url:/member/seller_edit}' class='orange'>请点击添加商户</a>
-						</td>
-					</tr>
+
 					<tr>
 						<th>所属分类：</th>
 						<td>
@@ -66,36 +67,8 @@
 							<label>只有上架的商品才会在前台显示出来，客户是无法看到下架商品</label>
 						</td>
 					</tr>
-					<tr>
-						<th>是否共享：</th>
-						<td>
-							<label class='attr'><input type="radio" name="is_share" value="1"> 是</label>
-							<label class='attr'><input type="radio" name="is_share" value="0" checked> 否</label>
-							<label>共享商品，只有商城平台的商品可以被商家复制，分销</label>
-						</td>
-					</tr>
-					<tr>
-						<th>附属数据：</th>
-						<td>
-							<div class="con">
-								<table class="border_table">
-									<thead>
-										<tr>
-											<th>购买成功增加积分</th><th>排序</th><th>计量单位显示</th><th>购买成功增加经验值</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input class="small" name="point" type="text" pattern="int" value="0"/></td>
-											<td><input class="small" name="sort" type="text" pattern="int" value="99"/></td>
-											<td><input class="small" name="unit" type="text" value="千克"/></td>
-											<td><input class="small" name="exp" type="text" pattern="int" value="0"/></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</td>
-					</tr>
+
+
 					<tr>
 						<th>基本数据：</th>
 						<td>
@@ -112,11 +85,8 @@
 										<%isProduct = true;%>
 										<th><a href="javascript:confirm('确定要删除此列规格？','delSpec(<%=templateData[item]['id']%>)');"><%=templateData[item]['name']%>【删】</a></th>
 										<%}%>
-										<th>库存</th>
 										<th>市场价格</th>
 										<th>销售价格</th>
-										<th>成本价格</th>
-										<th>重量(克)</th>
 										<%if(isProduct == true){%>
 										<th>操作</th>
 										<%}%>
@@ -146,15 +116,15 @@
 											<%}%>
 										</td>
 										<%}%>
-										<td><input class="tiny" name="_store_nums[<%=i%>]" type="text" pattern="int" value="<%=item['store_nums']?item['store_nums']:100%>" /></td>
+
 										<td><input class="tiny" name="_market_price[<%=i%>]" type="text" pattern="float" value="<%=item['market_price']%>" /></td>
+										
 										<td>
-											<input type='hidden' name="_groupPrice[<%=i%>]" value="<%=item['groupPrice']%>" />
+											
 											<input class="tiny" name="_sell_price[<%=i%>]" type="text" pattern="float" value="<%=item['sell_price']%>" />
-											<button class="btn" type="button" onclick="memberPrice(this);"><span class="add <%if(item['groupPrice']){%>orange<%}%>">会员组价格</span></button>
+											
 										</td>
-										<td><input class="tiny" name="_cost_price[<%=i%>]" type="text" pattern="float" empty value="<%=item['cost_price']%>" /></td>
-										<td><input class="tiny" name="_weight[<%=i%>]" type="text" pattern="float" empty value="<%=item['weight']%>" /></td>
+										
 										<%if(isProduct == true){%>
 										<td><a href="javascript:void(0)" onclick="delProduct(this);"><img class="operator" src="{skin:images/admin/icon_del.gif}" alt="删除" /></a></td>
 										<%}%>
@@ -216,13 +186,7 @@
 							</table>
 						</td>
 					</tr>
-					<tr>
-						<th>规格：</th>
-						<td>
-							<button class="btn" type="button" onclick="selSpec()"><span class="add">添加规格</span></button>
-							<label>可以生成不同组合参数的货品，比如：尺码xxl+红色+长袖 衣服</label>
-						</td>
-					</tr>
+
 					<tr>
 						<th>商品推荐类型：</th>
 						<td>

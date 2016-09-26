@@ -1,112 +1,707 @@
-<div class="wrapper clearfix">
-	<div class="wrap_box">
-		<h3 class="notice">已注册用户，请登录</h3>
-		<p class="tips">欢迎来到我们的网站，如果您已是本站会员请登录</p>
-		<div class="box login_box clearfix">
-			<form action='{url:/simple/login_act}' method='post'>
-				<table width="515" class="form_table f_l">
-					<col width="160px" />
-					<col />
-
-					{if:$this->getError()}
-					<tr><td colspan="2">
-						<div class="prompt"><img src="{skin:images/front/error_s.gif}" width="16" height="15" />{echo:$this->getError()}</div>
-					</td></tr>
-					{/if}
-
-					<tr><th>用户名/邮箱/手机：</th><td><input class="gray" type="text" name="login_info" value="{echo:ICookie::get('loginName');}" pattern='required' alt='填写用户名，邮箱，手机号' /></td></tr>
-					<tr><th>密码：</th><td><input class="gray" type="password" name="password" pattern='^\S{6,32}$' alt='填写密码' /></td></tr>
-					<tr class="low"><td></td>
-						<td>
-							<label class="attr"><input class="radio" type="checkbox" name="remember" value='1' />记住登录名</label>
-							<label class="attr"><a class="link pwd" href="{url:/simple/find_password}">忘记密码</a></label>
-						</td>
-					</tr>
-					<tr class="low">
-						<td></td>
-						<td>
-							{foreach:items=Api::run('getOauthList')}
-							<a href="javascript:oauthlogin('{$item['id']}');"><img src='{webroot:$item[logo]}' /></a>
-							{/foreach}
-						</td>
-					</tr>
-					<tr><td></td><td><input class="submit_login" type="submit" value="登录" /></td></tr>
-				</table>
-			</form>
-
-			{if:IReq::get('tourist') === null}
-			<!--正常登录时-->
-			<table width="360px" class="form_table prompt_3 f_l">
-				<col width="75px" />
-				<col />
-				<tr>
-					<th></th>
-					<td>
-						<p class="mt_10"><strong class="f14">您还不是<span class="orange">{$this->_siteConfig->name}</span>用户</strong></p>
-						<p>现在免费注册成为{$this->_siteConfig->name}商城用户，便能立即享受便宜又放心的购物乐趣。<a class="blue" href="{url:}">网站首页>></a></p>
-						<p class="mt_10"><a class="reg_btn" href="{url:/simple/reg}">注册新用户</a></p>
-					</td>
-				</tr>
-			</table>
-
-			{else:}
-			<!--访客购买时跳转-->
-			<table id="reg_table" width="360px" class="form_table prompt_3 f_l">
-				<col width="75px" />
-				<col />
-				<tr>
-					<th></th>
-					<td>
-						<p class="mt_10 m_15">
-							<strong class="f14">您还不是<span class="orange">{$this->_siteConfig->name}</span>用户</strong><br />
-							<label>使用游客身份结账或注册</label>
-						</p>
-						<p><label class="attr"><input class="radio" type='radio' name='next_step' value='acount' />使用游客身份结账</label></p>
-						<p><label class="attr"><input class="radio" type='radio' name='next_step' value='reg' checked='checked' />注册新用户</label></p>
-						<p class="mt_10 indentation">现在免费注册成为{$this->_siteConfig->name}商城用户，便能立即享受便宜又放心的购物乐趣。<a class="blue" href="{url:}">网站首页>></a></p>
-						<p class="mt_40 f_r"><a class="next_step" href="javascript:next_step();">下一步</a></p>
-					</td>
-				</tr>
-			</table>
-			{/if}
-
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Furnyish Store a Ecommerce Category Flat Bootstarp Responsive Website Template | Login :: w3layouts</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary JavaScript plugins) -->
+<script type='text/javascript' src="js/jquery-1.11.1.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Furnyish Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Montserrat|Raleway:400,200,300,500,600,700,800,900,100' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Aladin' rel='stylesheet' type='text/css'>
+<!-- start menu -->
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="js/menu_jquery.js"></script>
+<script src="js/simpleCart.min.js"> </script>
+  
+</head>
+<body>
+<!-- header -->
+<!-- header -->
+<div class="top_bg">
+	<div class="container">
+		<div class="header_top-sec">
+			<div class="top_right">
+				<ul>
+					<li><a href="#">help</a></li>|
+					<li><a href="contact.html">Contact</a></li>|
+					<li><a href="login.html">Track Order</a></li>
+				</ul>
+			</div>
+			<div class="top_left">
+				<ul>
+					<li class="top_link">Email:<a href="mailto@example.com"> info(at)Mobilya.com</a></li>|
+					<li class="top_link"><a href="login.html">My Account</a></li>|					
+				</ul>
+				<div class="social">
+					<ul>
+						<li><a href="#"><i class="facebook"></i></a></li>
+						<li><a href="#"><i class="twitter"></i></a></li>
+						<li><a href="#"><i class="dribble"></i></a></li>	
+						<li><a href="#"><i class="google"></i></a></li>										
+					</ul>
+				</div>
+			</div>
+				<div class="clearfix"> </div>
 		</div>
 	</div>
 </div>
+<div class="header_top">
+	 <div class="container">
+		 <div class="logo">
+		 	<a href="index.html"><img src="images/logo.png" alt=""/></a>			 
+		 </div>
+		 <div class="header_right">	
+			 <div class="login">
+				 <a href="login.html">LOGIN</a>
+			 </div>
+			 <div class="cart box_1">
+				<a href="cart.html">
+					<h3> <span class="simpleCart_total">$0.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)<img src="images/bag.png" alt=""></h3>
+				</a>	
+				<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+				<div class="clearfix"> </div>
+			 </div>				 
+		 </div>
+		  <div class="clearfix"></div>	
+	 </div>
+</div>
+<!--cart-->
+	 
+<!------>
+<div class="mega_nav">
+	 <div class="container">
+		 <div class="menu_sec">
+		 <!-- start header menu -->
+		 <ul class="megamenu skyblue">
+			 <li class="active grid"><a class="color1" href="index.html">Home</a></li>
+			 <li class="grid"><a class="color2" href="#">furniture</a>
+				<div class="megapanel">
+					<div class="row">
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Sofas</h4>
+								<ul>
+									<li><a href="products.html">All Sofas</a></li>
+									<li><a href="products.html">Fabric Sofas</a></li>
+									<li><a href="products.html">Leather Sofas</a></li>
+									<li><a href="products.html">L-shaped Sofas</a></li>
+									<li><a href="products.html">Love Seats</a></li>									
+									<li><a href="products.html">Wooden Sofas</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Tables</h4>
+								<ul>
+									<li><a href="products.html">Coffee Tables</a></li>
+									<li><a href="products.html">Dinning Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Wooden Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Bar & Unit Stools</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Beds</h4>
+								<ul>
+									<li><a href="products.html">Single Bed</a></li>
+									<li><a href="products.html">Poster Bed</a></li>
+									<li><a href="products.html">Sofa Cum Bed</a></li>
+									<li><a href="products.html">Bunk Bed</a></li>
+									<li><a href="products.html">King Size Bed</a></li>
+									<li><a href="products.html">Metal Bed</a></li>
+								</ul>	
+							</div>												
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Seating</h4>
+								<ul>
+									<li><a href="products.html">Wing Chair</a></li>
+									<li><a href="products.html">Accent Chair</a></li>
+									<li><a href="products.html">Arm Chair</a></li>
+									<li><a href="products.html">Mettal Chair</a></li>
+									<li><a href="products.html">Folding Chair</a></li>
+									<li><a href="products.html">Bean Bags</a></li>
+								</ul>	
+							</div>						
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Solid Woods</h4>
+								<ul>
+									<li><a href="products.html">Side Tables</a></li>
+									<li><a href="products.html">T.v Units</a></li>
+									<li><a href="products.html">Dressing Tables</a></li>
+									<li><a href="products.html">Wardrobes</a></li>
+									<li><a href="products.html">Shoe Racks</a></li>
+									<li><a href="products.html">Console Tables</a></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col2"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+					</div>
+    				</div>
+				</li>
+			<li><a class="color4" href="#">living</a>
+				<div class="megapanel">
+					<div class="row">
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Sofas</h4>
+								<ul>
+									<li><a href="products.html">All Sofas</a></li>
+									<li><a href="products.html">Fabric Sofas</a></li>
+									<li><a href="products.html">Leather Sofas</a></li>
+									<li><a href="products.html">L-shaped Sofas</a></li>
+									<li><a href="products.html">Love Seats</a></li>									
+									<li><a href="products.html">Wooden Sofas</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Tables</h4>
+								<ul>
+									<li><a href="products.html">Coffee Tables</a></li>
+									<li><a href="products.html">Dinning Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Wooden Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Bar & Unit Stools</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Beds</h4>
+								<ul>
+									<li><a href="products.html">Single Bed</a></li>
+									<li><a href="products.html">Poster Bed</a></li>
+									<li><a href="products.html">Sofa Cum Bed</a></li>
+									<li><a href="products.html">Bunk Bed</a></li>
+									<li><a href="products.html">King Size Bed</a></li>
+									<li><a href="products.html">Metal Bed</a></li>
+								</ul>	
+							</div>												
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Seating</h4>
+								<ul>
+									<li><a href="products.html">Wing Chair</a></li>
+									<li><a href="products.html">Accent Chair</a></li>
+									<li><a href="products.html">Arm Chair</a></li>
+									<li><a href="products.html">Mettal Chair</a></li>
+									<li><a href="products.html">Folding Chair</a></li>
+									<li><a href="products.html">Bean Bags</a></li>
+								</ul>	
+							</div>						
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Solid Woods</h4>
+								<ul>
+									<li><a href="products.html">Side Tables</a></li>
+									<li><a href="products.html">T.v Units</a></li>
+									<li><a href="products.html">Dressing Tables</a></li>
+									<li><a href="products.html">Wardrobes</a></li>
+									<li><a href="products.html">Shoe Racks</a></li>
+									<li><a href="products.html">Console Tables</a></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col2"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+					</div>
+    				</div>
+				</li>				
+				<li><a class="color5" href="#">kitchen & dinning</a>
+				<div class="megapanel">
+					<div class="row">
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Sofas</h4>
+								<ul>
+									<li><a href="products.html">All Sofas</a></li>
+									<li><a href="products.html">Fabric Sofas</a></li>
+									<li><a href="products.html">Leather Sofas</a></li>
+									<li><a href="products.html">L-shaped Sofas</a></li>
+									<li><a href="products.html">Love Seats</a></li>									
+									<li><a href="products.html">Wooden Sofas</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Tables</h4>
+								<ul>
+									<li><a href="products.html">Coffee Tables</a></li>
+									<li><a href="products.html">Dinning Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Wooden Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Bar & Unit Stools</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Beds</h4>
+								<ul>
+									<li><a href="products.html">Single Bed</a></li>
+									<li><a href="products.html">Poster Bed</a></li>
+									<li><a href="products.html">Sofa Cum Bed</a></li>
+									<li><a href="products.html">Bunk Bed</a></li>
+									<li><a href="products.html">King Size Bed</a></li>
+									<li><a href="products.html">Metal Bed</a></li>
+								</ul>	
+							</div>												
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Seating</h4>
+								<ul>
+									<li><a href="products.html">Wing Chair</a></li>
+									<li><a href="products.html">Accent Chair</a></li>
+									<li><a href="products.html">Arm Chair</a></li>
+									<li><a href="products.html">Mettal Chair</a></li>
+									<li><a href="products.html">Folding Chair</a></li>
+									<li><a href="products.html">Bean Bags</a></li>
+								</ul>	
+							</div>						
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Solid Woods</h4>
+								<ul>
+									<li><a href="products.html">Side Tables</a></li>
+									<li><a href="products.html">T.v Units</a></li>
+									<li><a href="products.html">Dressing Tables</a></li>
+									<li><a href="products.html">Wardrobes</a></li>
+									<li><a href="products.html">Shoe Racks</a></li>
+									<li><a href="products.html">Console Tables</a></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col2"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+					</div>
+    				</div>
+				</li>
+				<li><a class="color6" href="#">appliances</a>
+				<div class="megapanel">
+					<div class="row">
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Sofas</h4>
+								<ul>
+									<li><a href="products.html">All Sofas</a></li>
+									<li><a href="products.html">Fabric Sofas</a></li>
+									<li><a href="products.html">Leather Sofas</a></li>
+									<li><a href="products.html">L-shaped Sofas</a></li>
+									<li><a href="products.html">Love Seats</a></li>									
+									<li><a href="products.html">Wooden Sofas</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Tables</h4>
+								<ul>
+									<li><a href="products.html">Coffee Tables</a></li>
+									<li><a href="products.html">Dinning Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Wooden Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Bar & Unit Stools</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Beds</h4>
+								<ul>
+									<li><a href="products.html">Single Bed</a></li>
+									<li><a href="products.html">Poster Bed</a></li>
+									<li><a href="products.html">Sofa Cum Bed</a></li>
+									<li><a href="products.html">Bunk Bed</a></li>
+									<li><a href="products.html">King Size Bed</a></li>
+									<li><a href="products.html">Metal Bed</a></li>
+								</ul>	
+							</div>												
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Seating</h4>
+								<ul>
+									<li><a href="products.html">Wing Chair</a></li>
+									<li><a href="products.html">Accent Chair</a></li>
+									<li><a href="products.html">Arm Chair</a></li>
+									<li><a href="products.html">Mettal Chair</a></li>
+									<li><a href="products.html">Folding Chair</a></li>
+									<li><a href="products.html">Bean Bags</a></li>
+								</ul>	
+							</div>						
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Solid Woods</h4>
+								<ul>
+									<li><a href="products.html">Side Tables</a></li>
+									<li><a href="products.html">T.v Units</a></li>
+									<li><a href="products.html">Dressing Tables</a></li>
+									<li><a href="products.html">Wardrobes</a></li>
+									<li><a href="products.html">Shoe Racks</a></li>
+									<li><a href="products.html">Console Tables</a></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col2"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+					</div>
+    				</div>
+				</li>				
+			
+				<li><a class="color7" href="#">decor</a>
+				<div class="megapanel">
+					<div class="row">
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Sofas</h4>
+								<ul>
+									<li><a href="products.html">All Sofas</a></li>
+									<li><a href="products.html">Fabric Sofas</a></li>
+									<li><a href="products.html">Leather Sofas</a></li>
+									<li><a href="products.html">L-shaped Sofas</a></li>
+									<li><a href="products.html">Love Seats</a></li>									
+									<li><a href="products.html">Wooden Sofas</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Tables</h4>
+								<ul>
+									<li><a href="products.html">Coffee Tables</a></li>
+									<li><a href="products.html">Dinning Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Wooden Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Bar & Unit Stools</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Beds</h4>
+								<ul>
+									<li><a href="products.html">Single Bed</a></li>
+									<li><a href="products.html">Poster Bed</a></li>
+									<li><a href="products.html">Sofa Cum Bed</a></li>
+									<li><a href="products.html">Bunk Bed</a></li>
+									<li><a href="products.html">King Size Bed</a></li>
+									<li><a href="products.html">Metal Bed</a></li>
+								</ul>	
+							</div>												
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Seating</h4>
+								<ul>
+									<li><a href="products.html">Wing Chair</a></li>
+									<li><a href="products.html">Accent Chair</a></li>
+									<li><a href="products.html">Arm Chair</a></li>
+									<li><a href="products.html">Mettal Chair</a></li>
+									<li><a href="products.html">Folding Chair</a></li>
+									<li><a href="products.html">Bean Bags</a></li>
+								</ul>	
+							</div>						
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Solid Woods</h4>
+								<ul>
+									<li><a href="products.html">Side Tables</a></li>
+									<li><a href="products.html">T.v Units</a></li>
+									<li><a href="products.html">Dressing Tables</a></li>
+									<li><a href="products.html">Wardrobes</a></li>
+									<li><a href="products.html">Shoe Racks</a></li>
+									<li><a href="products.html">Console Tables</a></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col2"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+					</div>
+    				</div>
+				</li>				
+			
+				<li><a class="color8" href="#">kids</a>
+				<div class="megapanel">
+					<div class="row">
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Sofas</h4>
+								<ul>
+									<li><a href="products.html">All Sofas</a></li>
+									<li><a href="products.html">Fabric Sofas</a></li>
+									<li><a href="products.html">Leather Sofas</a></li>
+									<li><a href="products.html">L-shaped Sofas</a></li>
+									<li><a href="products.html">Love Seats</a></li>									
+									<li><a href="products.html">Wooden Sofas</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Tables</h4>
+								<ul>
+									<li><a href="products.html">Coffee Tables</a></li>
+									<li><a href="products.html">Dinning Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Wooden Tables</a></li>
+									<li><a href="products.html">Study Tables</a></li>
+									<li><a href="products.html">Bar & Unit Stools</a></li>
+								</ul>	
+							</div>							
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Beds</h4>
+								<ul>
+									<li><a href="products.html">Single Bed</a></li>
+									<li><a href="products.html">Poster Bed</a></li>
+									<li><a href="products.html">Sofa Cum Bed</a></li>
+									<li><a href="products.html">Bunk Bed</a></li>
+									<li><a href="products.html">King Size Bed</a></li>
+									<li><a href="products.html">Metal Bed</a></li>
+								</ul>	
+							</div>												
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Seating</h4>
+								<ul>
+									<li><a href="products.html">Wing Chair</a></li>
+									<li><a href="products.html">Accent Chair</a></li>
+									<li><a href="products.html">Arm Chair</a></li>
+									<li><a href="products.html">Mettal Chair</a></li>
+									<li><a href="products.html">Folding Chair</a></li>
+									<li><a href="products.html">Bean Bags</a></li>
+								</ul>	
+							</div>						
+						</div>
+						<div class="col1">
+							<div class="h_nav">
+								<h4>Solid Woods</h4>
+								<ul>
+									<li><a href="products.html">Side Tables</a></li>
+									<li><a href="products.html">T.v Units</a></li>
+									<li><a href="products.html">Dressing Tables</a></li>
+									<li><a href="products.html">Wardrobes</a></li>
+									<li><a href="products.html">Shoe Racks</a></li>
+									<li><a href="products.html">Console Tables</a></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col2"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+						<div class="col1"></div>
+					</div>
+    				</div>
+				</li>				
+			   </ul> 
+			   <div class="search">
+				 <form>
+					<input type="text" value="" placeholder="Search...">
+					<input type="submit" value="">
+					</form>
+			 </div>
+			 <div class="clearfix"></div>
+		 </div>
+	  </div>
+</div>
+<!---->
+<div class="login_sec">
+	 <div class="container">
+		 <ol class="breadcrumb">
+		  <li><a href="index.html">Home</a></li>
+		  <li class="active">Login</li>
+		 </ol>
+		 <h2>Login</h2>
+		 <div class="col-md-6 log">			 
+				 <p>Welcome, please enter the folling to continue.</p>
+				 <p>If you have previously Login with us, <span>click here</span></p>
+				 <form>
+					 <h5>User Name:</h5>	
+					 <input type="text" value="">
+					 <h5>Password:</h5>
+					 <input type="password" value="">					
+					 <input type="submit" value="Login">
+					  <a href="#">Forgot Password ?</a>
+				 </form>				 
+		 </div>
+		  <div class="col-md-6 login-right">
+			  	<h3>NEW REGISTRATION</h3>
+				<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+				<a class="acount-btn" href="account.html">Create an Account</a>
+		 </div>
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!---->
+<div class="footer-content">
+	 <div class="container">
+		 <div class="ftr-grids">
+			 <div class="col-md-3 ftr-grid">
+				 <h4>About Us</h4>
+				 <ul>
+					 <li><a href="#">Who We Are</a></li>
+					 <li><a href="contact.html">Contact Us</a></li>
+					 <li><a href="#">Our Sites</a></li>
+					 <li><a href="#">In The News</a></li>
+					 <li><a href="#">Team</a></li>
+					 <li><a href="#">Carrers</a></li>					 
+				 </ul>
+			 </div>
+			 <div class="col-md-3 ftr-grid">
+				 <h4>Customer service</h4>
+				 <ul>
+					 <li><a href="#">FAQ</a></li>
+					 <li><a href="#">Shipping</a></li>
+					 <li><a href="#">Cancellation</a></li>
+					 <li><a href="#">Returns</a></li>
+					 <li><a href="#">Bulk Orders</a></li>
+					 <li><a href="#">Buying Guides</a></li>					 
+				 </ul>
+			 </div>
+			 <div class="col-md-3 ftr-grid">
+				 <h4>Your account</h4>
+				 <ul>
+					 <li><a href="account.html">Your Account</a></li>
+					 <li><a href="#">Personal Information</a></li>
+					 <li><a href="#">Addresses</a></li>
+					 <li><a href="#">Discount</a></li>
+					 <li><a href="#">Track your order</a></li>					 					 
+				 </ul>
+			 </div>
+			 <div class="col-md-3 ftr-grid">
+				 <h4>Categories</h4>
+				 <ul>
+					 <li><a href="#">> Furinture</a></li>
+					 <li><a href="#">> Bean Bags</a></li>
+					 <li><a href="#">> Decor</a></li>
+					 <li><a href="#">> Kichen & Dinning</a></li>
+					 <li><a href="#">> Bed & Bath</a></li>
+					 <li><a href="#">...More</a></li>					 
+				 </ul>
+			 </div>
+			 <div class="clearfix"></div>
+		 </div>
+	 </div>
+</div>
+<!---->
+<div class="footer">
+	 <div class="container">
+		 <div class="store">
+			 <ul>
+				 <li class="active">OUR STORE LOCATOR::</li>
+				 <li><a href="#">Noida</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Belgium</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">China</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Germany</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Japan</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Armenia</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">South Africa</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Malaysia</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Indonesia</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Mumbai</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Portugal</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Spain</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Northern Ireland</a></li>	
+				 <li><a href="#">|</a></li>				 
+				 <li><a href="#">Mohali</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Gurgaon</a></li>
+				 <li><a href="#">|</a></li>
+				 <li><a href="#">Panchkula</a></li>
+				 <li><a href="#">|</a></li>				 
+				 <li><a href="#">Ambala</a></li>	
+			 </ul>
+		 </div>		 
+		 <div class="copywrite">
+			 <p>Copyright © 2015 Furnyish Store All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+		 </div>			 
+		 </div>
+	 </div>
+</div>
+<!---->
+</body>
+</html>
 
-<script type='text/javascript'>
-//DOM加载结束
-$(function(){
-	$(".form_table input").focus(function(){$(this).addClass('current');}).blur(function(){$(this).removeClass('current');})
-});
 
-//多平台登录
-function oauthlogin(oauth_id)
-{
-	$.getJSON('{url:/simple/oauth_login}',{"id":oauth_id},function(content){
-		if(content.isError == false)
-		{
-			window.location.href = content.url;
-		}
-		else
-		{
-			alert(content.message);
-		}
-	});
-}
-
-//下一步操作
-function next_step()
-{
-	var step_val = $('[name="next_step"]:checked').val();
-	if(step_val == 'acount')
-	{
-		{set:$url = plugin::trigger('getCallback')."/tourist/yes"}
-		window.location.href = '{url:$url}';
-	}
-	else if(step_val == 'reg')
-	{
-		window.location.href = '{url:/simple/reg}';
-	}
-}
-</script>
+</body>
+</html>

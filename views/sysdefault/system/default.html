@@ -7,14 +7,8 @@
 
 <div class="content_box" style="border:none">
 	<div class="content">
-		{set:$safeInstance = new safeStrategy();$checkResult = $safeInstance->check();}
-		{if:$checkResult}
-		<ul class="red_box">
-		{foreach:items=$checkResult}
-		<li><img src="{skin:images/admin/error.gif}" />{$item['content']}</li>
-		{/foreach}
-		</ul>
-		{/if}
+{set:$safeInstance = new safeStrategy();$checkResult = $safeInstance->check();}
+
 		<table width="31%" cellspacing="0" cellpadding="5" class="border_table_org" style="float:left">
 			<thead>
 				<tr><th>系统信息</th></tr>

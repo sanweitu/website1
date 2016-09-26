@@ -6,10 +6,11 @@
 	height: 162px;
 }
 .sky-form h4{
+	font-size: 0.85em;
+	font-weight: 600;
 	padding: 10px 0;
 	text-transform: uppercase;
-	color: #00a0dc;
-	font-size:1.1em;
+	color: #026466;
 }
 section.sky-form{
 	border-top:1px solid #eee;
@@ -32,7 +33,7 @@ section.sky-form{
 	border: none;
 	margin-bottom: 4px;
 	padding-left: 27px;
-	font-size: 12.5px;
+	font-size: 14px;
 	line-height: 30px;
 	font-weight: 400;
 	color: #555555;
@@ -122,7 +123,7 @@ section.sky-form{
 .jspVerticalBar{
 	position: absolute;
 	top: 0;
-	right:0px;
+	right:40px;
 	width:3px;
 	height: 100%;
 }
