@@ -143,7 +143,7 @@ class goods_class
 		}
 
 		$goodsUpdateData['goods_no']     = isset($postData['_goods_no'])     ? current($postData['_goods_no'])     : '';
-		$goodsUpdateData['store_nums']   = array_sum($postData['_store_nums']);
+		$goodsUpdateData['store_nums']   = 99999;
 		$goodsUpdateData['market_price'] = isset($postData['_market_price']) ? current($postData['_market_price']) : 0;
 		$goodsUpdateData['sell_price']   = isset($postData['_sell_price'])   ? current($postData['_sell_price'])   : 0;
 		$goodsUpdateData['cost_price']   = isset($postData['_cost_price'])   ? current($postData['_cost_price'])   : 0;
@@ -204,7 +204,7 @@ class goods_class
 				$productsData = array(
 					'goods_id' => $id,
 					'products_no' => $postData['_goods_no'][$key],
-					'store_nums' => $postData['_store_nums'][$key],
+					'store_nums' => 99999,
 					'market_price' => $postData['_market_price'][$key],
 					'sell_price' => $postData['_sell_price'][$key],
 					'cost_price' => $postData['_cost_price'][$key],
