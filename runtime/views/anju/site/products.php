@@ -62,7 +62,12 @@
 			<div class="top_left">
 				<ul>
 					<li class="top_link">Email:<a href="295131283@qq.com">info(at)Funiture.com</a></li>|
-					<li class="top_link"><a href="<?php echo IUrl::creatUrl("site/login");?>">My Account</a></li>|	
+					<li class="top_link"><?php if($this->user){?>
+			<?php echo $this->user['username'];?>您好，欢迎您来到<?php echo $this->_siteConfig->name;?>购物！[<a href="<?php echo IUrl::creatUrl("/simple/logout");?>" class="reg">安全退出</a>]
+			<?php }else{?>
+			[<a href="<?php echo IUrl::creatUrl("/simple/login");?>">登录</a>|<a class="reg" href="<?php echo IUrl::creatUrl("/simple/reg");?>">注册</a>]
+			<?php }?></li>|
+						
 					
 				</ul>
 				<div class="social">
@@ -93,7 +98,7 @@
 		 <div class="menu_sec">
 		 <!-- start header menu -->
 		 <ul class="megamenu skyblue">
-			 <li class="active grid"><a class="color1" href="index.html">Home</a></li>
+			 <li class="active grid"><a class="color1" href="index.php">Home</a></li>
 			 <?php foreach(Api::run('getCategoryListTop') as $key => $first){?>
 				<li class="grid"><a class="color2" href="<?php echo IUrl::creatUrl("/site/pro_list/cat/".$first['id']."");?>"><?php echo isset($first['name'])?$first['name']:"";?></a>
 				<div class="megapanel">
@@ -236,63 +241,70 @@
 					  
 					  
 			
-			<!-- 顾客评论 -->  				 
-		</div>
-				  <div class="clearfix"></div>
-				  <div class="sofaset-info">
-						 <h4>商品<?php echo isset($name)?$name:"";?>已有<b class="red2"><?php echo isset($comments)?$comments:"";?></b>条评论</h4>
-						 <!--<div class="user">
-						<div class="ico">
-							<a href="javascript:void(0)">
-								<img src="<?php echo IUrl::creatUrl("")."<%=head_ico%>";?>" width="70px" height="70px" onerror="this.src='<?php echo $this->getWebSkinPath()."images/front/user_ico.gif";?>'" />
-							</a>
-						</div>
-						
-						<span class="blue"><%=username%></span>
-					</div>-->
-						<div class="wrapper main f_r">
-		<div class="wrap_box">
-			<form method="post" action="<?php echo IUrl::creatUrl("/site/comment_add");?>">
-			<input type="hidden" name="id" value="<?php echo isset($this->comment['id'])?$this->comment['id']:"";?>" />
-			<table class="form_table f_l">
-				<caption><img src="<?php echo $this->getWebSkinPath()."images/front/comments.gif";?>" width="88" height="23" alt="我要评论" /></caption>
-				<col width="120px" />
-				<col />
-				<tr>
-					<th>评论等级：</th>
-					<td>
-						<label><input name="point" class="radio" type="radio" value="5" checked="checked" /><span class="grade-star g-star5"></span></label>
-						<label><input name="point" class="radio" type="radio" value="4" /><span class="grade-star g-star4"></span></label>
-						<label><input name="point" class="radio" type="radio" value="3" /><span class="grade-star g-star3"></span></label>
-						<label><input name="point" class="radio" type="radio" value="2" /><span class="grade-star g-star2"></span></label>
-						<label><input name="point" class="radio" type="radio" value="1" /><span class="grade-star g-star1"></span></label>
-					</td>
-				</tr>
-				<tr>
-					<th>评论内容：</th><td valign="top"><textarea name="contents" id="contents"></textarea></td>
-				</tr>
-				<tr><td></td><td><label class="btn"><input type="submit" value="我要评价" /></label></td></tr>
-			</table>
-			</form>
-		</div>
-	</div>	
-					<div class="desc">
-						<p class="clearfix">
-							<b>评分：</b>
-							<li><span ><%=point%>"></span></li>
-							<li><span ><%=comment_time%></span><label></label></li>
-						</p>
-						<hr />
-						<p><b>评价：</b><span class="gray"><%=contents%></span></p>
-						<%if(recontents){%>
-						<p><b>回复：</b><span class="red"><%=recontents%></span></p>
-						<%}%>
-					</div>
-				  </div>				  					
-		    </div>
-			     				
+		
+		
 		     <div class="clearfix"></div>
+		</div>
 	  </div>
+	     				
+	  </div>
+	  <!-- 网友讨论圈 start -->
+		<div >
+			<div class="title3">
+				<span class="f_r f12 normal"><a class="comm_btn" name="discussButton">发表话题</a></span>
+				<img src="<?php echo $this->getWebSkinPath()."images/front/discuss.gif";?>" width="18px" height="19px" />
+				网友讨论圈<span class="f12 normal">（共<b class="red2"><?php echo isset($discussion)?$discussion:"";?></b>记录）</span>
+			</div>
+			<div class="wrap_box no_wrap">
+				<!--讨论内容列表-->
+				<table width="100%" class="list_table">
+					<colgroup>
+						<col />
+						<col width="150">
+					</colgroup>
+
+					<tbody id='discussBox'></tbody>
+				</table>
+
+				<!--讨论JS模板-->
+				<script type='text/html' id='discussRowTemplate'>
+				<tr>
+					<td class="t_l discussion_td" style="border:none;">
+						<span class="blue"><%=username%></span>
+					</td>
+					<td style="border:none;" class="t_r gray discussion_td"><%=time%></td>
+				</tr>
+				<tr><td class="t_l" colspan="2" style="padding:0 7px 0 13px;"><%=contents%></td></tr>
+				</script>
+
+				<!--讨论内容输入框-->
+				<table class="form_table" style="display:none;" id="discussTable">
+					<colgroup>
+						<col width="80px">
+						<col />
+					</colgroup>
+
+					<tbody>
+						<tr>
+							<th>讨论内容：</th>
+							<td valign="top"><textarea id="discussContent" pattern="required" alt="请填写内容"></textarea></td>
+						</tr>
+						<tr>
+							<th>验证码：</th>
+							<td><input type='text' class='gray_s' name='captcha' pattern='^\w{5}$' alt='填写下面图片所示的字符' /><label>填写下面图片所示的字符</label></td>
+						</tr>
+						<tr class="low">
+							<th></th>
+							<td><img src='<?php echo IUrl::creatUrl("/site/getCaptcha");?>' id='captchaImg' /><span class="light_gray">看不清？<a class="link" href="javascript:changeCaptcha();">换一张</a></span></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><label class="btn"><input type="submit" value="发表" name="sendDiscussButton" /></label></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>  
 	<?php if(isset($content) && $content){?>
 		<div class="salebox">
 			<strong class="saletitle block">产品描述：</strong>

@@ -62,7 +62,12 @@
 			<div class="top_left">
 				<ul>
 					<li class="top_link">Email:<a href="295131283@qq.com">info(at)Funiture.com</a></li>|
-					<li class="top_link"><a href="<?php echo IUrl::creatUrl("site/login");?>">My Account</a></li>|	
+					<li class="top_link"><?php if($this->user){?>
+			<?php echo $this->user['username'];?>您好，欢迎您来到<?php echo $this->_siteConfig->name;?>购物！[<a href="<?php echo IUrl::creatUrl("/simple/logout");?>" class="reg">安全退出</a>]
+			<?php }else{?>
+			[<a href="<?php echo IUrl::creatUrl("/simple/login");?>">登录</a>|<a class="reg" href="<?php echo IUrl::creatUrl("/simple/reg");?>">注册</a>]
+			<?php }?></li>|
+						
 					
 				</ul>
 				<div class="social">
@@ -93,7 +98,7 @@
 		 <div class="menu_sec">
 		 <!-- start header menu -->
 		 <ul class="megamenu skyblue">
-			 <li class="active grid"><a class="color1" href="index.html">Home</a></li>
+			 <li class="active grid"><a class="color1" href="index.php">Home</a></li>
 			 <?php foreach(Api::run('getCategoryListTop') as $key => $first){?>
 				<li class="grid"><a class="color2" href="<?php echo IUrl::creatUrl("/site/pro_list/cat/".$first['id']."");?>"><?php echo isset($first['name'])?$first['name']:"";?></a>
 				<div class="megapanel">

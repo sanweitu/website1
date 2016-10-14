@@ -1,0 +1,42 @@
+
+<div class="login_sec">
+	 <div class="container">
+		 <ol class="breadcrumb">
+		  <li><a href="index.html">Home</a></li>
+		  <li class="active">Login</li>
+		 </ol>
+		 <h2>Login</h2>
+		 <div class="col-md-6 log">			 
+			 <p>Welcome, please enter the folling to continue.</p>
+			 
+			 <form action='{url:/simple/login_act}' method='post'>
+				{if:$this->getError()}
+				<tr><td colspan="2">
+					<div class="prompt"><img src="{skin:images/front/error_s.gif}" width="16" height="15" />{echo:$this->getError()}</div>
+				</td></tr>
+				{/if}
+				 <h5>用户名/邮箱/手机：</h5>	
+				 <input type="text" name="login_info" pattern='required' alt='填写用户名，邮箱，手机号'  />
+				 <h5>密码：</h5>			
+				 <input  type="password" name="password" pattern='^\S{6,32}$' alt='填写密码' />
+				 <input type="submit" value="Login">
+				  <a href="{url:/simple/find_password}">忘记密码 ?</a>
+			 </form>
+					
+		 </div>
+		 {if:IReq::get('tourist') === null}
+		  <div class="col-md-6 login-right">
+			  	<h3>NEW REGISTRATION</h3>
+				<p>您还不是<span class="orange">{$this->_siteConfig->name}</span>用户</strong></p>
+						<p>现在免费注册成为{$this->_siteConfig->name}商城用户，便能立即享受便宜又放心的购物乐趣。<a class="blue" href="{url:index.php}">网站首页>></a></p>
+				<a class="acount-btn" href="{url:/simple/reg}">注册新用户</a>
+		 </div>
+		 {else:}
+		 <p class="mt_40 f_r"><a class="next_step" href="javascript:next_step();">下一步</a></p>
+		 {/if}
+		 <div class="clearfix"></div>
+		 
+			
+	 </div>
+</div>
+<!---->

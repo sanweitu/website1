@@ -1,0 +1,19 @@
+<ERROR_BLOCK>
+excepInfo: Call to a member function find() on null
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\products.php
+excepLine: 250
+excepCode: 0
+excepTime: 2016-10-09 22:56:33
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(115): require
+#1 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/products.php)
+#2 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/products)
+#3 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/products)
+#4 IWEB_PATH/lib/web/controller/controller_class.php(367): IViewAction->run()
+#5 IWEB_PATH/controllers/site.php(444): IController->redirect(products)
+#6 IWEB_PATH/lib/web/action/inline_action.php(24): Site->products()
+#7 IWEB_PATH/lib/web/controller/controller_class.php(115): IInlineAction->run()
+#8 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(products)
+#9 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#10 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+

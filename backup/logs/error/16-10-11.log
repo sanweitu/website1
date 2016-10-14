@@ -1,0 +1,135 @@
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 318
+excepCode: 0
+excepTime: 2016-10-11 20:07:32
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 319
+excepCode: 0
+excepTime: 2016-10-11 20:08:40
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 319
+excepCode: 0
+excepTime: 2016-10-11 20:08:42
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 319
+excepCode: 0
+excepTime: 2016-10-11 20:10:20
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 319
+excepCode: 0
+excepTime: 2016-10-11 20:10:21
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 319
+excepCode: 0
+excepTime: 2016-10-11 20:10:22
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 318
+excepCode: 0
+excepTime: 2016-10-11 20:12:03
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 318
+excepCode: 0
+excepTime: 2016-10-11 20:12:06
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+
+<ERROR_BLOCK>
+excepInfo: syntax error, unexpected end of file
+excepFile: C:\httpd-2.4.23-x64-vc14\Apache24\htdocs\iwebshop\runtime\views\anju\site\reg.php
+excepLine: 318
+excepCode: 0
+excepTime: 2016-10-11 20:12:08
+#0 IWEB_PATH/lib/web/controller/controllerbase_class.php(81): IControllerBase->requireFile(IWEB_PATH/runtime/views/anju/site/reg.php)
+#1 IWEB_PATH/lib/web/controller/controller_class.php(166): IControllerBase->renderView(IWEB_PATH/views/anju/site/reg)
+#2 IWEB_PATH/lib/web/action/view_action.php(32): IController->render(IWEB_PATH/views/anju/site/reg)
+#3 IWEB_PATH/lib/web/controller/controller_class.php(115): IViewAction->run()
+#4 IWEB_PATH/lib/core/webapplication_class.php(75): IController->run(reg)
+#5 IWEB_PATH/lib/core/application_class.php(94): IWebApplication->execRequest()
+#6 IWEB_PATH/index.php(5): IApplication->run()
+</ERROR_BLOCK>
+

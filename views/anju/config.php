@@ -7,5 +7,6 @@ return array(
 	'thumb'   => 'preview.jpg',
 	'info'    => 'aaaaaaaaaaa',
 	'type'    => '商城前台-PC',
-);
+	'layout'  => array('simple'=>'site')
+	);
 ?>

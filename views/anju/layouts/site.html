@@ -62,7 +62,12 @@
 			<div class="top_left">
 				<ul>
 					<li class="top_link">Email:<a href="295131283@qq.com">info(at)Funiture.com</a></li>|
-					<li class="top_link"><a href="{url:site/login}">My Account</a></li>|	
+					<li class="top_link">{if:$this->user}
+			{echo:$this->user['username']}您好，欢迎您来到{echo:$this->_siteConfig->name}购物！[<a href="{url:/simple/logout}" class="reg">安全退出</a>]
+			{else:}
+			[<a href="{url:/simple/login}">登录</a>|<a class="reg" href="{url:/simple/reg}">注册</a>]
+			{/if}</li>|
+						
 					
 				</ul>
 				<div class="social">

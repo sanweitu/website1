@@ -150,167 +150,47 @@
 	  </div>
 </div>
 
-	
+	<div class="wrapper clearfix">
+	<div class="wrap_box">
+		<div class="error box clearfix">
+			<table class="form_table prompt_3">
+				<colgroup>
+					<col width="320px" />
+					<col />
+				</colgroup>
 
-<div class="clearfix">
-	<!---->
-<div class="content">
-	 <div class="container">
-		 <div class="slider">
-				<ul class="rslides" id="slider1">
-				  <li><img src="<?php echo $this->getWebSkinPath()."images/front/banner2.jpg";?>" alt=""></li>
-				  <li><img src="<?php echo $this->getWebSkinPath()."images/front/banner1.jpg";?>" alt=""></li>
-				  <li><img src="<?php echo $this->getWebSkinPath()."images/front/banner3.jpg";?>" alt=""></li>
-				</ul>
-		 </div>
-	 </div>
-</div>
-<!---->
-<div class="bottom_content">
-	 <div class="container">
-		 <div class="sofas">
-			 <div class="col-md-6 sofa-grid">
-				 <img src="<?php echo $this->getWebSkinPath()."images/front/t1.jpg";?>" alt=""/>
-				 <h3>IMPORTED DINING SETS</h3>
-				 <h4><a href="products.html">SPECIAL ACCENTS OFFER</a></h4>
-			 </div>
-			 <div class="col-md-6 sofa-grid sofs">
-				 <img src="<?php echo $this->getWebSkinPath()."images/front/t2.jpg";?>" alt=""/>
-				 <h3>SPECIAL DESIGN SOFAS</h3>
-				 <h4><a href="products.html">FABFURNISHING MELA</a></h4>
-			 </div>
-			 <div class="clearfix"></div>
-		 </div>
-	 </div>
-</div>
-<!---->
+				<tbody>
+					<tr>
+						<th><img src="<?php echo $this->getWebSkinPath()."images/front/right.gif";?>" width="48px" height="51px" /></th>
+						<td>
+							<strong class="f14">
+							<?php echo IReq::get('message') ? IFilter::act(urldecode(IReq::get('message')),'text') : '操作成功！';?>
+							</strong>
+						</td>
+					</tr>
 
+					<tr>
+						<th></th>
+						<td>
+							您现在可以去：
+							<?php $callback = plugin::trigger('getCallback')?>
+							<?php if($callback){?>
+							<a class="blue" href="<?php echo IUrl::creatUrl("".$callback."");?>">继续操作 >></a>
+							<?php }?>
 
-					
-	<div class="top-sellers">
+							<?php if($this->user['user_id']){?>
+							<a class="blue" href="<?php echo IUrl::creatUrl("/ucenter/index");?>">个人中心 >></a>
+							<?php }?>
 
-		<!--最新商品-->
-			<div class="container">
-			<h3>new</h3>
-			<div class="seller-grids">
-			<?php foreach(Api::run('getCommendNew',8) as $key => $item){?>
-			<div class="col-md-3 seller-grid">
-				 <a href="products.html"><img src="<?php echo IUrl::creatUrl("/pic/thumb/img/".$item['img']."/w/175/h/175");?>" width="175" height="175" alt="<?php echo isset($item['name'])?$item['name']:"";?>"/></a>
-				 <h4><a href="products.html">Carnival Doublecot Bed</a></h4>
-				 <span>ID: DB4790</span>
-				 <p>Rs. 25000/-</p>
-				 
-			 </div>
-			
-					<?php }?>
-				<!--<ul class="prolist">
-					<?php foreach(Api::run('getCommendNew',8) as $key => $item){?>
-					<?php $tmpId=$item['id'];?>
-					<li style="overflow:hidden">
-						<a href="<?php echo IUrl::creatUrl("/site/products/id/".$tmpId."");?>"><img src="<?php echo IUrl::creatUrl("/pic/thumb/img/".$item['img']."/w/175/h/175");?>" width="175" height="175" alt="<?php echo isset($item['name'])?$item['name']:"";?>" /></a>
-						<p class="pro_title"><a title="<?php echo isset($item['name'])?$item['name']:"";?>" href="<?php echo IUrl::creatUrl("/site/products/id/".$tmpId."");?>"><?php echo isset($item['name'])?$item['name']:"";?></a></p>
-						<p class="brown">惊喜价：<b>￥<?php echo isset($item['sell_price'])?$item['sell_price']:"";?></b></p>
-						<p class="light_gray">市场价：<s>￥<?php echo isset($item['market_price'])?$item['market_price']:"";?></s></p>
-					</li>
-					<?php }?>
-				</ul>-->
-			</div>
+							<a class="blue" href="<?php echo IUrl::creatUrl("/site/index");?>">网站首页 >></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<!--最新商品-->
-
-		</div>
-	
+	</div>
 </div>
 
-<div class="recommendation">
-	 <div class="container">
-		 <div class="recmnd-head">
-			 <h3>RECOMMENDATIONS FOR YOU</h3>
-		 </div>
-		 <div class="bikes-grids">			 
-			 <ul id="flexiselDemo1">
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/ts1.jpg";?>" alt=""/></a>	
-					 <h4><a href="products.html">King Size Bed</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r2.jpg";?>" alt=""/></a>	
-					 <h4><a href="products.html">Elite Diwan Seater</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r3.jpg";?>" alt=""/></a>
-					 <h4><a href="products.html">Dior Corner Sofa</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r4.jpg";?>" alt=""/></a>
-					 <h4><a href="products.html">Alia Modular Sofa</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r5.jpg";?>" alt=""/></a>	
-					 <h4><a href="products.html">King Size Bed</a></h4>	
-					 <p>ID: KS3989</p>					 
-				 </li>
-		    </ul>
-			<script type="text/javascript">
-			 $(window).load(function() {			
-			  $("#flexiselDemo1").flexisel({
-				visibleItems: 5,
-				animationSpeed: 1000,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover:true,
-				enableResponsiveBreakpoints: true,
-				responsiveBreakpoints: { 
-					portrait: { 
-						changePoint:480,
-						visibleItems: 1
-					}, 
-					landscape: { 
-						changePoint:640,
-						visibleItems: 2
-					},
-					tablet: { 
-						changePoint:768,
-						visibleItems: 3
-					}
-				}
-			});
-			});
-			</script>
-			<script type="text/javascript" src="<?php echo $this->getWebViewPath()."javascript/jquery.flexisel.js";?>"></script>			 
-	 </div>
-	 </div>
-</div>
-<script type='text/javascript'>
-//dom载入完毕执行
-jQuery(function()
-{
-
-	//index 分类展示
-	$('#index_category tr').hover(
-		function(){
-			$(this).addClass('current');
-		},
-		function(){
-			$(this).removeClass('current');
-		}
-	);
-
-	
-
-	//首页商品变色
-	var colorArray = ['green','yellow','purple','black'];
-	$('div[name="showGoods"]').each(function(i)
-	{
-		$(this).addClass(colorArray[i%colorArray.length]);
-	});
-});
-
-</script>
 
 <!---->
 

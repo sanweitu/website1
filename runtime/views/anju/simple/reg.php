@@ -65,7 +65,7 @@
 					<li class="top_link"><?php if($this->user){?>
 			<?php echo $this->user['username'];?>您好，欢迎您来到<?php echo $this->_siteConfig->name;?>购物！[<a href="<?php echo IUrl::creatUrl("/simple/logout");?>" class="reg">安全退出</a>]
 			<?php }else{?>
-			[<a href="<?php echo IUrl::creatUrl("/simple/login");?>">登录</a>|<a class="reg" href="<?php echo IUrl::creatUrl("/simple/reg");?>">注册</a>]
+			[<a href="<?php echo IUrl::creatUrl("/site/login");?>">登录</a>|<a class="reg" href="<?php echo IUrl::creatUrl("/simple/reg");?>">注册</a>]
 			<?php }?></li>|
 						
 					
@@ -150,166 +150,147 @@
 	  </div>
 </div>
 
-	
-
-<div class="clearfix">
-	<!---->
-<div class="content">
-	 <div class="container">
-		 <div class="slider">
-				<ul class="rslides" id="slider1">
-				  <li><img src="<?php echo $this->getWebSkinPath()."images/front/banner2.jpg";?>" alt=""></li>
-				  <li><img src="<?php echo $this->getWebSkinPath()."images/front/banner1.jpg";?>" alt=""></li>
-				  <li><img src="<?php echo $this->getWebSkinPath()."images/front/banner3.jpg";?>" alt=""></li>
-				</ul>
-		 </div>
-	 </div>
-</div>
-<!---->
-<div class="bottom_content">
-	 <div class="container">
-		 <div class="sofas">
-			 <div class="col-md-6 sofa-grid">
-				 <img src="<?php echo $this->getWebSkinPath()."images/front/t1.jpg";?>" alt=""/>
-				 <h3>IMPORTED DINING SETS</h3>
-				 <h4><a href="products.html">SPECIAL ACCENTS OFFER</a></h4>
-			 </div>
-			 <div class="col-md-6 sofa-grid sofs">
-				 <img src="<?php echo $this->getWebSkinPath()."images/front/t2.jpg";?>" alt=""/>
-				 <h3>SPECIAL DESIGN SOFAS</h3>
-				 <h4><a href="products.html">FABFURNISHING MELA</a></h4>
-			 </div>
-			 <div class="clearfix"></div>
-		 </div>
-	 </div>
-</div>
-<!---->
-
-
-					
-	<div class="top-sellers">
-
-		<!--最新商品-->
-			<div class="container">
-			<h3>new</h3>
-			<div class="seller-grids">
-			<?php foreach(Api::run('getCommendNew',8) as $key => $item){?>
-			<div class="col-md-3 seller-grid">
-				 <a href="products.html"><img src="<?php echo IUrl::creatUrl("/pic/thumb/img/".$item['img']."/w/175/h/175");?>" width="175" height="175" alt="<?php echo isset($item['name'])?$item['name']:"";?>"/></a>
-				 <h4><a href="products.html">Carnival Doublecot Bed</a></h4>
-				 <span>ID: DB4790</span>
-				 <p>Rs. 25000/-</p>
-				 
-			 </div>
+	<div class="container">
+	  <ol class="breadcrumb">
+		  <li><a href="index.html">Home</a></li>
+		  <li class="active">Account</li>
+		 </ol>
+	 <div class="registration">
+		 <div class="registration_left">
+			 <h2>new user? <span> create an account </span></h2>
+			 <!-- [if IE] 
+				< link rel='stylesheet' type='text/css' href='ie.css'/>  
+			 [endif] -->  
+			  
+			 <!-- [if lt IE 7]>  
+				< link rel='stylesheet' type='text/css' href='ie6.css'/>  
+			 <! [endif] -->  
+			 <script>
+				(function() {
 			
-					<?php }?>
-				<!--<ul class="prolist">
-					<?php foreach(Api::run('getCommendNew',8) as $key => $item){?>
-					<?php $tmpId=$item['id'];?>
-					<li style="overflow:hidden">
-						<a href="<?php echo IUrl::creatUrl("/site/products/id/".$tmpId."");?>"><img src="<?php echo IUrl::creatUrl("/pic/thumb/img/".$item['img']."/w/175/h/175");?>" width="175" height="175" alt="<?php echo isset($item['name'])?$item['name']:"";?>" /></a>
-						<p class="pro_title"><a title="<?php echo isset($item['name'])?$item['name']:"";?>" href="<?php echo IUrl::creatUrl("/site/products/id/".$tmpId."");?>"><?php echo isset($item['name'])?$item['name']:"";?></a></p>
-						<p class="brown">惊喜价：<b>￥<?php echo isset($item['sell_price'])?$item['sell_price']:"";?></b></p>
-						<p class="light_gray">市场价：<s>￥<?php echo isset($item['market_price'])?$item['market_price']:"";?></s></p>
-					</li>
-					<?php }?>
-				</ul>-->
-			</div>
-		</div>
-		<!--最新商品-->
-
-		</div>
-	
-</div>
-
-<div class="recommendation">
-	 <div class="container">
-		 <div class="recmnd-head">
-			 <h3>RECOMMENDATIONS FOR YOU</h3>
-		 </div>
-		 <div class="bikes-grids">			 
-			 <ul id="flexiselDemo1">
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/ts1.jpg";?>" alt=""/></a>	
-					 <h4><a href="products.html">King Size Bed</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r2.jpg";?>" alt=""/></a>	
-					 <h4><a href="products.html">Elite Diwan Seater</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r3.jpg";?>" alt=""/></a>
-					 <h4><a href="products.html">Dior Corner Sofa</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r4.jpg";?>" alt=""/></a>
-					 <h4><a href="products.html">Alia Modular Sofa</a></h4>	
-					 <p>ID: KS3989</p>
-				 </li>
-				 <li>
-					 <a href="products.html"><img src="<?php echo $this->getWebSkinPath()."images/front/r5.jpg";?>" alt=""/></a>	
-					 <h4><a href="products.html">King Size Bed</a></h4>	
-					 <p>ID: KS3989</p>					 
-				 </li>
-		    </ul>
-			<script type="text/javascript">
-			 $(window).load(function() {			
-			  $("#flexiselDemo1").flexisel({
-				visibleItems: 5,
-				animationSpeed: 1000,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover:true,
-				enableResponsiveBreakpoints: true,
-				responsiveBreakpoints: { 
-					portrait: { 
-						changePoint:480,
-						visibleItems: 1
-					}, 
-					landscape: { 
-						changePoint:640,
-						visibleItems: 2
-					},
-					tablet: { 
-						changePoint:768,
-						visibleItems: 3
+				// Create input element for testing
+				var inputs = document.createElement('input');
+				
+				// Create the supports object
+				var supports = {};
+				
+				supports.autofocus   = 'autofocus' in inputs;
+				supports.required    = 'required' in inputs;
+				supports.placeholder = 'placeholder' in inputs;
+			
+				// Fallback for autofocus attribute
+				if(!supports.autofocus) {
+					
+				}
+				
+				// Fallback for required attribute
+				if(!supports.required) {
+					
+				}
+			
+				// Fallback for placeholder attribute
+				if(!supports.placeholder) {
+					
+				}
+				
+				// Change text inside send button on submit
+				var send = document.getElementById('register-submit');
+				if(send) {
+					send.onclick = function () {
+						this.innerHTML = '...Sending';
 					}
 				}
-			});
-			});
-			</script>
-			<script type="text/javascript" src="<?php echo $this->getWebViewPath()."javascript/jquery.flexisel.js";?>"></script>			 
-	 </div>
+			
+			 })();
+			 </script>
+
+			 <div class="registration_form">
+			 <!-- Form -->
+				<form action='<?php echo IUrl::creatUrl("/simple/reg_act");?>' method='post'>
+				<?php if($this->_siteConfig->reg_option == 1){?>
+					<div>
+						<label>
+							<input placeholder="邮箱：" type="text" tabindex="1" name="email" pattern="email" alt="填写正确的邮箱格式" >
+						</label>
+					</div>
+				<?php }?>
+					<div>
+						<label>
+							<input placeholder="请填写用户名，格式为2-20个字符，可以为字数，数字下划线和中文" name='username' type="text" tabindex="2" pattern="^[\w\u0391-\uFFE5]{2,20}$" alt="填写2-20个字符，可以为字数，数字下划线和中文" />
+						</label>
+					</div>					
+										
+					<div>
+						<label>
+							<input placeholder="填写登录密码，6-32个字符" type="password" tabindex="4" name='password' pattern="^\S{6,32}$" bind='repassword' alt='填写6-32个字符' /><
+						</label>
+					</div>						
+					<div>
+						<label>
+							<input placeholder="重复上面所填写的密码" type="password" name='repassword' pattern="^\S{6,32}$" bind='password' alt='重复上面所填写的密码' />
+						</label>
+					</div>
+					<div>
+						<label>					
+						<input  type='text' name='captcha' pattern='^\w{5,10}$' alt='填写图片所示的字符' /><img src='<?php echo IUrl::creatUrl("/simple/getCaptcha");?>' id='captchaImg' onclick="changeCaptcha();" /><label>填写图片所示的字符</label>
+						</label>
+					</div>	
+					<?php if($this->_siteConfig->reg_option == 3){?>
+					<div>
+						<label>	
+						<input placeholder="手机号：" type="text" name='mobile' pattern="mobi" alt="填写正确的手机格式" />
+					</label>
+					</div>	
+					<div>
+					<label>
+							<input placeholder="验证码：“ type='text' name='mobile_code' pattern='^\w{4,6}$' />
+							<input onclick="_sendMobileCode(this);" type="button" value="获取验证码" style="line-height:25px;background-color:#fff;color:#000;width:90px; " /><label>填写手机短信验证码</label>
+						</label>
+					</div>	
+					<?php }?>
+					<div>
+						<input type="submit" value="create an account" >
+					</div>
+					<div class="sky-form">
+						<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>i agree to mobilya.com &nbsp;<a class="terms" href="#"> terms of service</a> </label>
+					</div>
+				</form>
+				<!-- /Form -->
+			 </div>
+		 </div>
+		 <div class="registration_left">
+			 <h2>existing user</h2>
+			 <div class="registration_form">
+			 <!-- Form -->
+				<form action='<?php echo IUrl::creatUrl("/simple/login_act");?>' method='post'>
+					<div>
+						<label>
+							<input placeholder="email:" type="email" tabindex="3" required>
+						</label>
+					</div>
+					<div>
+						<label>
+							<input placeholder="password" type="password" tabindex="4" required>
+						</label>
+					</div>						
+					<div>
+						<input type="submit" value="sign in" id="register-submit">
+					</div>
+					<div class="forget">
+						<a href="#">forgot your password</a>
+					</div>
+				</form>
+			 <!-- /Form -->
+			 </div>
+		 </div>
+		 <div class="clearfix"></div>
 	 </div>
 </div>
+<!-- end registration -->
 <script type='text/javascript'>
-//dom载入完毕执行
-jQuery(function()
-{
-
-	//index 分类展示
-	$('#index_category tr').hover(
-		function(){
-			$(this).addClass('current');
-		},
-		function(){
-			$(this).removeClass('current');
-		}
-	);
-
-	
-
-	//首页商品变色
-	var colorArray = ['green','yellow','purple','black'];
-	$('div[name="showGoods"]').each(function(i)
-	{
-		$(this).addClass(colorArray[i%colorArray.length]);
-	});
+$(function(){
+	$(".form_table input:text").focus(function(){$(this).addClass('current');}).blur(function(){$(this).removeClass('current');})
 });
-
 </script>
 
 <!---->
