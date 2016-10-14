@@ -96,68 +96,86 @@
 	  </div>
 	     				
 	  </div>
-	  <!-- 网友讨论圈 start -->
-		<div >
-			<div class="title3">
-				<span class="f_r f12 normal"><a class="comm_btn" name="discussButton">发表话题</a></span>
-				<img src="{skin:images/front/discuss.gif}" width="18px" height="19px" />
-				网友讨论圈<span class="f12 normal">（共<b class="red2">{$discussion}</b>记录）</span>
-			</div>
-			<div class="wrap_box no_wrap">
-				<!--讨论内容列表-->
-				<table width="100%" class="list_table">
-					<colgroup>
-						<col />
-						<col width="150">
-					</colgroup>
-
-					<tbody id='discussBox'></tbody>
-				</table>
-
-				<!--讨论JS模板-->
-				<script type='text/html' id='discussRowTemplate'>
-				<tr>
-					<td class="t_l discussion_td" style="border:none;">
-						<span class="blue"><%=username%></span>
-					</td>
-					<td style="border:none;" class="t_r gray discussion_td"><%=time%></td>
-				</tr>
-				<tr><td class="t_l" colspan="2" style="padding:0 7px 0 13px;"><%=contents%></td></tr>
-				</script>
-
-				<!--讨论内容输入框-->
-				<table class="form_table" style="display:none;" id="discussTable">
-					<colgroup>
-						<col width="80px">
-						<col />
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th>讨论内容：</th>
-							<td valign="top"><textarea id="discussContent" pattern="required" alt="请填写内容"></textarea></td>
-						</tr>
-						<tr>
-							<th>验证码：</th>
-							<td><input type='text' class='gray_s' name='captcha' pattern='^\w{5}$' alt='填写下面图片所示的字符' /><label>填写下面图片所示的字符</label></td>
-						</tr>
-						<tr class="low">
-							<th></th>
-							<td><img src='{url:/site/getCaptcha}' id='captchaImg' /><span class="light_gray">看不清？<a class="link" href="javascript:changeCaptcha();">换一张</a></span></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><label class="btn"><input type="submit" value="发表" name="sendDiscussButton" /></label></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>  
-	{if:isset($content) && $content}
-		<div class="salebox">
-			<strong class="saletitle block">产品描述：</strong>
-			<p class="saledesc">{$content}</p>
-		</div>
-	{/if}	  
+	  
 </div>
 <!---->
+
+<div class="wrapper clearfix container_2">
+
+	
+	<!--滑动面tab标签-->
+	<div class="main f_r" style="overflow:hidden">
+
+		<div name="showBox">
+			
+			<!-- 网友讨论圈 start -->
+			<div >
+				<div class="title3">
+					<span class="f_r f12 normal"><a class="comm_btn" name="discussButton">发表评论</a></span>
+					<img src="{skin:images/front/discuss.gif}" width="18px" height="19px" />
+					评论<span class="f12 normal">（共<b class="red2">{$discussion}</b>记录）</span>
+				</div>
+				<div class="wrap_box no_wrap">
+					<!--讨论内容列表-->
+					<table width="100%" class="list_table">
+						<colgroup>
+							<col />
+							<col width="150">
+						</colgroup>
+
+						<tbody id='discussBox'></tbody>
+					</table>
+
+					<!--讨论JS模板-->
+					<script type='text/html' id='discussRowTemplate'>
+					<tr>
+						<td class="t_l discussion_td" style="border:none;">
+							<span class="blue"><%=username%></span>
+						</td>
+						<td style="border:none;" class="t_r gray discussion_td"><%=time%></td>
+					</tr>
+					<tr><td class="t_l" colspan="2" style="padding:0 7px 0 13px;"><%=contents%></td></tr>
+					</script>
+
+					<!--讨论内容输入框-->
+					<table class="form_table" style="display:none;" id="discussTable">
+						<colgroup>
+							<col width="80px">
+							<col />
+						</colgroup>
+
+						<tbody>
+							<tr>
+								<th>讨论内容：</th>
+								<td valign="top"><textarea id="discussContent" pattern="required" alt="请填写内容"></textarea></td>
+							</tr>
+							<tr>
+								<th>验证码：</th>
+								<td><input type='text' class='gray_s' name='captcha' pattern='^\w{5}$' alt='填写下面图片所示的字符' /><label>填写下面图片所示的字符</label></td>
+							</tr>
+							<tr class="low">
+								<th></th>
+								<td><img src='{url:/site/getCaptcha}' id='captchaImg' /><span class="light_gray">看不清？<a class="link" href="javascript:changeCaptcha();">换一张</a></span></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><label class="btn"><input type="submit" value="发表" name="sendDiscussButton" /></label></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- 网友讨论圈 end -->
+			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+//DOM加载结束后
+$(function(){
+	//初始化商品详情对象
+	var productInstance = new productClass("{$id}","{$this->user['user_id']}","{$promo}","{$active_id}");
+productInstance.discuss_ajax();
+	
+});
+</script>
